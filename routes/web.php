@@ -17,14 +17,14 @@ Route::get('/', function () {
     return view('index');
 })->name('games');
 
-Route::get('/summary', function () {
+Route::get('/reviews', function () {
     return view('index');
-})->name('summary');
+})->name('reviews');
 
 Route::get('/coming', function () {
     return view('index');
 })->name('coming');
 
-Route::get('/game', function () {
-    return view('game');
+Route::get('/game_reviews', function () {
+    return view('game-review');
 });

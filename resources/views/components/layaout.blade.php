@@ -14,7 +14,7 @@
     <header class="border-b border-gray-700">
         <x-navigation.bar>
             <x-navigation.link route="games">Games</x-navigation.link>
-            <x-navigation.link route="summary">Summary</x-navigation.link>
+            <x-navigation.link route="reviews">Reviews</x-navigation.link>
             <x-navigation.link route="coming">Coming soon</x-navigation.link>
         </x-navigation.bar>
     </header>

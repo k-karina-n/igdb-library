@@ -1,6 +1,6 @@
 <div class="mt-8">
     <div class="relative inline-block">
-        <a href="/game">
+        <a href="/game_reviews">
             <img src="{{ $game }}" alt="game-cover"
                 class="w-52 h-72 rounded-lg shadow-md hover:opacity-75 transition ease-in-out duration-150">
         </a>

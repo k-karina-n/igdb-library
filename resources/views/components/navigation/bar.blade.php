@@ -3,7 +3,7 @@
 
         <img src="/game.png" alt="logo" class="w-8">
         <a href="{{ route('games') }}">
-            <div class="px-2 text-2xl uppercase text-gray-700">Online Library</div>
+            <div class="px-2 text-2xl uppercase text-gray-700">Game Library</div>
         </a>
 
         <div class="flex ml-0 lg:ml-16 space-x-8 mt-6 lg:mt-0">
