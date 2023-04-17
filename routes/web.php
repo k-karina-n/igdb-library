@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-})->name('books');
+})->name('games');
 
 Route::get('/summary', function () {
     return view('index');
@@ -25,6 +25,6 @@ Route::get('/coming', function () {
     return view('index');
 })->name('coming');
 
-Route::get('/book', function () {
-    return view('book');
+Route::get('/game', function () {
+    return view('game');
 });
