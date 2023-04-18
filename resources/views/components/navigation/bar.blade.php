@@ -1,7 +1,6 @@
 <nav class="container mx-auto flex flex-col lg:flex-row items-center justify-between px-4 py-6">
     <div class="flex flex-col lg:flex-row items-center">
 
-        <img src="/game.png" alt="logo" class="w-8">
         <a href="{{ route('games') }}">
             <div class="px-2 text-2xl uppercase text-gray-700">Game Library</div>
         </a>
