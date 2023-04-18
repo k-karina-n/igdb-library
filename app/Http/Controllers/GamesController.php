@@ -23,8 +23,7 @@ class GamesController extends Controller
             & first_release_date < {$after}
             & total_rating_count > 5);
             sort total_rating_count desc;
-            limit 10;")
-            ->post('https://api.igdb.com/v4/games')
+            limit 10;")->post('https://api.igdb.com/v4/games')
             ->json();
 
         $current =  Carbon::now()->timestamp;
@@ -44,7 +43,7 @@ class GamesController extends Controller
         $comingGames = Http::withHeaders(config('services.igdb'))
             ->withBody("fields name, cover.url, first_release_date, platforms.abbreviation;
             where platforms = (48,49,136,6)
-            & (first_release_date >= {$current});
+            & (first_release_date > {$current});
             sort first_release_date asc;
             limit 5;")
             ->post('https://api.igdb.com/v4/games')

@@ -10,7 +10,7 @@
 
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-200">
     <header class="border-b border-gray-700">
         <x-navigation.bar>
             <x-navigation.link route="games">Games</x-navigation.link>

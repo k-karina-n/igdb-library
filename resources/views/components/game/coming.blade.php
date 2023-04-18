@@ -1,7 +1,7 @@
 <div class="flex">
     <a href="#">
         <img alt="game-cover" class="w-24 h-32 rounded-lg shadow-md hover:opacity-75 transition ease-in-out duration-150"
-            @if (array_key_exists('cover', $game))  src="{{ Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) }}"
+            @if (array_key_exists('cover', $game)) src="{{ Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) }}"
                 @else
                     src="/no-image.jpg" @endif>
     </a>
@@ -20,7 +20,7 @@
         </p>
 
         <p class="mt-2 capitalize text-sm text-gray-500">
-        {{ gmdate("Y-m-d", $game['first_release_date']) }}
+            {{ Carbon\Carbon::parse($game['first_release_date'])->format('M d, Y') }}
         </p>
     </div>
 </div>
