@@ -10,52 +10,24 @@ class PagesController extends Controller
 {
     public function index()
     {
-        $before = Carbon::now()->subMonths(2)->timestamp;
-        $after = Carbon::now()->addMonths(2)->timestamp;
-
-        $popularGames = Http::withHeaders(config('services.igdb'))
-            ->withBody("fields name, cover.url, platforms.abbreviation, slug, rating; 
-            where platforms = (48,49,136,6) 
-            & (first_release_date >= {$before}
-            & first_release_date < {$after}
-            & total_rating_count > 5);
-            sort total_rating_count desc;
-            limit 10;")->post('https://api.igdb.com/v4/games')
-            ->json();
-
-        $before = Carbon::now()->subMonths(2)->timestamp;
-        $current =  Carbon::now()->timestamp;
-
-        $reviewedGames = Http::withHeaders(config('services.igdb'))
-            ->withBody("fields name, cover.url, first_release_date, 
-            platforms.abbreviation, rating, rating_count, total_rating, summary;
-            where platforms = (48,49,136,6)
-            & (first_release_date >= {$before}
-            & first_release_date < {$current}
-            & rating_count > 5);
-            sort total_rating desc;
-            limit 3;")
-            ->post('https://api.igdb.com/v4/games')
-            ->json();
-
-        $comingGames = Http::withHeaders(config('services.igdb'))
-            ->withBody("fields name, cover.url, first_release_date, platforms.abbreviation;
-            where platforms = (48,49,136,6)
-            & (first_release_date > {$current});
-            sort first_release_date asc;
-            limit 5;")
-            ->post('https://api.igdb.com/v4/games')
-            ->json();
-
-        return view('index', [
-            'popularGames' => $popularGames,
-            'reviewedGames' => $reviewedGames,
-            'comingGames' => $comingGames
-        ]);
+        return view('index');
     }
 
-    public function popularGames()
+    public function gameReview($slug)
     {
+        $game = Http::withHeaders(config('services.igdb'))
+            ->withBody("fields name,cover.url,genres.name,involved_companies.company.name,platforms.abbreviation,storyline,
+            total_rating, total_rating_count,
+            videos.*,screenshots.*,
+            similar_games.name,similar_games.cover.url,similar_games.rating,
+            similar_games.platforms.abbreviation,similar_games.slug; 
+            where slug=\"{$slug}\";")
+            ->post('https://api.igdb.com/v4/games')
+            ->json();
+        dump($game[0]['screenshots']);
+        return view('game-review', [
+            'game' => $game[0],
+        ]);
     }
 
     /**

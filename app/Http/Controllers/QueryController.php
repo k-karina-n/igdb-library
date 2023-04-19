@@ -34,7 +34,7 @@ class QueryController extends Controller
 
         $reviewedGames = Http::withHeaders(config('services.igdb'))
             ->withBody("fields name, cover.url, first_release_date, 
-            platforms.abbreviation, rating, rating_count, total_rating, summary;
+            platforms.abbreviation, rating, rating_count, total_rating, summary, slug;
             where platforms = (48,49,136,6)
             & (first_release_date >= {$before}
             & first_release_date < {$current}
@@ -53,7 +53,7 @@ class QueryController extends Controller
     {
         $current =  Carbon::now()->timestamp;
         $comingGames = Http::withHeaders(config('services.igdb'))
-            ->withBody("fields name, cover.url, first_release_date, platforms.abbreviation;
+            ->withBody("fields name, cover.url, first_release_date, platforms.abbreviation, slug;
         where platforms = (48,49,136,6)
         & (first_release_date > {$current});
         sort first_release_date asc;
