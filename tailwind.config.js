@@ -12,7 +12,6 @@ module.exports = {
       fontFamily: {
         serif: ['Latin Modern Roman', 'Times New Roman', 'Noto Serif SC', 'serif', ...defaultTheme.fontFamily.serif]
       },
-
     },
   },
   plugins: [],

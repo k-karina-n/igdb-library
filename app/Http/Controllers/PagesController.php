@@ -6,11 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class GamesController extends Controller
+class PagesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $before = Carbon::now()->subMonths(2)->timestamp;
@@ -26,6 +23,7 @@ class GamesController extends Controller
             limit 10;")->post('https://api.igdb.com/v4/games')
             ->json();
 
+        $before = Carbon::now()->subMonths(2)->timestamp;
         $current =  Carbon::now()->timestamp;
 
         $reviewedGames = Http::withHeaders(config('services.igdb'))
@@ -56,12 +54,8 @@ class GamesController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function popularGames()
     {
-        //
     }
 
     /**
