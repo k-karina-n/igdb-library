@@ -1,7 +1,7 @@
 @php
-    $classes = Request::routeIs($route) ? 'text-zinc-800 underline underline-offset-8' : 'text-gray-600';
+    $classes = Request::routeIs($route) ? 'text-dark' : 'text-white';
 @endphp
 
-<a href="{{ route($route) }}" {{ $attributes->merge(['class' => "font-medium text-lg hover:text-zinc-800 {$classes}"]) }}>
+<a href="{{ route($route) }}" {{ $attributes->merge(['class' => "font-medium text-lg hover:text-dark {$classes}"]) }}>
     {{ $slot }}
 </a>

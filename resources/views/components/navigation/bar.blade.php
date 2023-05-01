@@ -2,7 +2,7 @@
     <div class="flex flex-col lg:flex-row items-center">
 
         <a href="{{ route('games') }}">
-            <div class="px-2 text-2xl uppercase text-gray-700">Game Library</div>
+            <div class="px-2 text-2xl uppercase text-white hover:text-dark">Game Library</div>
         </a>
 
         <div class="flex ml-0 lg:ml-16 space-x-8 mt-6 lg:mt-0">
@@ -16,7 +16,7 @@
         <div clas="relative">
             <div class="flex items-center h-full ml-2">
                 <input type="text"
-                    class="bg-gray-200 text-sm rounded-full w-64 px-3 py-1 pl-8 border hover:border-gray-400 active:border-gray-400 focus:outline-none focus:border-gray-400"
+                    class="bg-white text-sm rounded-full w-64 px-3 py-1 pl-8 focus:outline-none{{-- hover:border-gray-400 active:border-gray-400 focus:border-gray-400 --}}"
                     placeholder="Search...">
                 <div class="pl-3 absolute">
                     <svg class="fill-current w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">

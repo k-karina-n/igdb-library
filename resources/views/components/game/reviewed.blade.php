@@ -1,4 +1,4 @@
-<div class="flex bg-zinc-100 rounded-lg shadow-md flex px-6 py-6">
+<div class="flex bg-blue rounded-lg shadow-md flex px-6 py-6">
     <div class="relative flex-none">
         <a href="#">
             <img alt="game-cover"
@@ -19,11 +19,11 @@
     </div>
 
     <div class="ml-12">
-        <a href="#" class="block mt-4 capitalize text-lg font-semibold leading-tight hover:text-zinc-500">
+        <a href="#" class="block mt-4 capitalize text-lg text-white font-semibold leading-tight hover:text-zinc-500">
             {{ $game['name'] }}
         </a>
 
-        <div class="text-gray-500 mt-1">
+        <div class="text-white mt-1">
             @foreach ($game['platforms'] as $platform)
                 @if (array_key_exists('abbreviation', $platform))
                     {{ $platform['abbreviation'] }}
@@ -31,6 +31,6 @@
             @endforeach
         </div>
 
-        <p class="mt-6 text-gray-500 hidden md:block lg:block">{{ $game['summary'] }}</p>
+        <p class="mt-6 text-text hidden md:block lg:block">{{ $game['summary'] }}</p>
     </div>
 </div>

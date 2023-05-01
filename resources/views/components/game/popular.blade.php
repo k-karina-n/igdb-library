@@ -8,20 +8,27 @@
                     src="/no-image.jpg" @endif>
         </a>
         @if (isset($game['rating']))
-            <div class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full border border-zinc-600 shadow-md"
+            <div id="rating"
+                class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full border border-zinc-600 shadow-md"
                 style="right: -20px; bottom: -20px">
-                <div class="font-semibold text-lg text-gray-700 flex justify-center items-center h-full">
+                {{-- <div class="font-semibold text-lg text-gray-700 flex justify-center items-center h-full">
                     {{ round($game['rating']) . '%' }}
-                </div>
+                </div> --}}
+                {{-- @php
+                    $id = '#rating';
+                    $rating = round($game['rating']);
+                @endphp
+                <x-rating :id="$id" :rating="$rating" /> --}}
             </div>
         @endif
     </div>
 
-    <a href="#" class="block mt-4 text-base font-semibold leading-tight hover:text-zinc-500">
+    <a href="#"
+        class="block mt-4 text-white text-base font-semibold leading-tight hover:transitoon ease-in-out duration-150 hover:text-gray hover:underline underline-offset-8 hover:pb-1">
         {{ $game['name'] }}
     </a>
 
-    <div class="text-gray-500 mt-1">
+    <div class="text-gray mt-1">
         @foreach ($game['platforms'] as $platform)
             @if (array_key_exists('abbreviation', $platform))
                 {{ $platform['abbreviation'] }}
