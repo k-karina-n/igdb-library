@@ -24,7 +24,6 @@ class PagesController extends Controller
             where slug=\"{$slug}\";")
             ->post('https://api.igdb.com/v4/games')
             ->json();
-        dump($game[0]['screenshots']);
         return view('game-review', [
             'game' => $game[0],
         ]);

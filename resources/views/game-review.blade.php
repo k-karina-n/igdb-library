@@ -45,11 +45,12 @@
                     <div class="flex items-center space-x-2">
                         <div id="memberRating"
                             class="w-14 h-14 bg-zinc-100 rounded-full border shadow-md relative text-md">
-                            @php
-                                $id = '#memberRating';
-                                $rating = round($game['total_rating']);
-                            @endphp
-                            <x-rating :id="$id" :rating="$rating" />
+                            @push('scripts')
+                                @include('rating', [
+                                    'id' => '#memberRating',
+                                    'rating' => round($game['total_rating']),
+                                ])
+                            @endpush
                         </div>
                         <div class="text-xs text-gray-700">Member <br> Score</div>
                     </div>
@@ -57,14 +58,12 @@
                     <div class="flex items-center space-x-2">
                         <div id="criticRating"
                             class="w-14 h-14 bg-zinc-100 rounded-full border border-zinc-600 shadow-md relative text-md">
-                            {{-- <div class="font-semibold text-gray-700 text-md flex justify-center items-center h-full">
-                                {{ round($game['total_rating_count']) . '%' }}
-                            </div> --}}
-                            @php
-                                $id = '#criticRating';
-                                $rating = round($game['total_rating_count']);
-                            @endphp
-                            <x-rating :id="$id" :rating="$rating" />
+                            @push('scripts')
+                                @include('rating', [
+                                    'id' => '#criticRating',
+                                    'rating' => round($game['total_rating_count']),
+                                ])
+                            @endpush
                         </div>
                         <div class="text-xs text-gray-700">Critic <br> Score</div>
                     </div>

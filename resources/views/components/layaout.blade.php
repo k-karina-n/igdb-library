@@ -26,6 +26,7 @@
             Powered By IGDB API
         </div>
     </footer>
+    @stack('scripts')
 </body>
 
 </html>

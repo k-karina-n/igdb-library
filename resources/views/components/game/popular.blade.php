@@ -11,14 +11,9 @@
             <div id="rating"
                 class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full border border-zinc-600 shadow-md"
                 style="right: -20px; bottom: -20px">
-                {{-- <div class="font-semibold text-lg text-gray-700 flex justify-center items-center h-full">
+                <div class="font-semibold text-lg text-gray-700 flex justify-center items-center h-full">
                     {{ round($game['rating']) . '%' }}
-                </div> --}}
-                {{-- @php
-                    $id = '#rating';
-                    $rating = round($game['rating']);
-                @endphp
-                <x-rating :id="$id" :rating="$rating" /> --}}
+                </div>
             </div>
         @endif
     </div>
