@@ -7,6 +7,7 @@
                 @else
                     src="/no-image.jpg" @endif>
         </a>
+
         @if (isset($game['rating']))
             <div id="rating"
                 class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full border border-zinc-600 shadow-md"
@@ -18,8 +19,8 @@
         @endif
     </div>
 
-    <a href="#"
-        class="block mt-4 text-white text-base font-semibold leading-tight hover:transitoon ease-in-out duration-150 hover:text-gray hover:underline underline-offset-8 hover:pb-1">
+    <a href="/game_reviews/{{ $game['slug'] }}"
+        class="block mt-4 text-white text-base font-semibold leading-tight hover:transitoon ease-in-out duration-150 hover:text-gray hover:underline underline-offset-8 hover:pb-1 hover:leading-relaxed">
         {{ $game['name'] }}
     </a>
 

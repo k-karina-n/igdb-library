@@ -1,6 +1,6 @@
 <div class="flex bg-blue rounded-lg shadow-md flex px-6 py-6">
     <div class="relative flex-none">
-        <a href="#">
+        <a href="/game_reviews/{{ $game['slug'] }}">
             <img alt="game-cover"
                 class="w-44 h-56 rounded-lg shadow-md hover:opacity-75 transition ease-in-out duration-150"
                 @if (array_key_exists('cover', $game)) src="{{ Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) }}"
@@ -19,7 +19,7 @@
     </div>
 
     <div class="ml-12">
-        <a href="#" class="block mt-4 capitalize text-lg text-white font-semibold leading-tight hover:text-zinc-500">
+        <a href="/game_reviews/{{ $game['slug'] }}" class="block mt-4 capitalize text-lg text-white font-semibold leading-tight hover:transitoon ease-in-out duration-150 hover:text-gray hover:underline underline-offset-8 hover:pb-1 hover:leading-relaxed">
             {{ $game['name'] }}
         </a>
 
@@ -31,6 +31,6 @@
             @endforeach
         </div>
 
-        <p class="mt-6 text-text hidden md:block lg:block">{{ $game['summary'] }}</p>
+        <p class="mt-6 text-white hidden md:block lg:block">{{ $game['summary'] }}</p>
     </div>
 </div>
