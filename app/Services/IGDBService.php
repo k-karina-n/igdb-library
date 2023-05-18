@@ -3,10 +3,7 @@
 namespace App\Services;
 
 use App\Services\APIRequestService;
-use App\Services\DataObjects\PopularGameDataObject;
-use App\Services\DataObjects\ReviewedGameDataObject;
-use App\Services\DataObjects\ComingGameDataObject;
-use App\Services\DataObjects\GameReviewDataObject;
+use App\DataObjects\GameDataObject;
 
 
 class IGDBService
@@ -20,26 +17,34 @@ class IGDBService
 
     public function getPopularGames()
     {
-        return $this->service->requestPopularGames();
+        $games = $this->service->getPopularGames();
+
+        /* foreach ($games as $game) {
+            $popularGames[] = new PopularGameDataObject($game);
+        } */
+
+        return $games;
     }
 
     public function getReviewedGames()
     {
-        return $this->service->requestReviewedGames();
+        return $this->service->getReviewedGames();
     }
 
     public function getComingGames()
     {
-        return $this->service->requestComingGames();
+        return $this->service->getComingGames();
     }
 
     public function getGameReview(string $slug)
     {
-        $game = $this->service->requestGameReview($slug);
+        $game = $this->service->getGame($slug);
 
-        if (!array_key_exists('storyline', $game[0])) {
+        //$game = collect(new GameReviewDataObject($game[0]));
+
+        /* if (!array_key_exists('storyline', $game[0])) {
             $game[0]['storyline'] = 'Waiting for updates...';
-        }
+        } */
 
         return $game[0];
     }

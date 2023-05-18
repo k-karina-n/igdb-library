@@ -26,7 +26,7 @@ class APIRequestService
             ->json();
     }
 
-    public function requestPopularGames(): array
+    public function getPopularGames(): array
     {
         return $this->makeRequest("fields name, cover.url, platforms.abbreviation, slug, rating; 
         where platforms = (48,49,136,6) 
@@ -37,7 +37,7 @@ class APIRequestService
         limit 10;");
     }
 
-    public function requestReviewedGames(): array
+    public function getReviewedGames(): array
     {
         return $this->makeRequest("fields name, cover.url, first_release_date, 
         platforms.abbreviation, rating, rating_count, total_rating, summary, slug;
@@ -49,7 +49,7 @@ class APIRequestService
         limit 3;");
     }
 
-    public function requestComingGames(): array
+    public function getComingGames(): array
     {
         return $this->makeRequest("fields name, cover.url, first_release_date, platforms.abbreviation, slug;
         where platforms = (48,49,136,6)
@@ -58,7 +58,7 @@ class APIRequestService
         limit 5;");
     }
 
-    public function requestGameReview(string $slug): array
+    public function getGame(string $slug): array
     {
         return $this->makeRequest("fields name,cover.url,genres.name,involved_companies.company.name,
             platforms.abbreviation,storyline, total_rating, total_rating_count,videos.*,screenshots.*,
