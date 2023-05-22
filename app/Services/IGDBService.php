@@ -3,42 +3,42 @@
 namespace App\Services;
 
 use App\Services\APIRequestService;
-use App\DataObjects\GameDataObject;
-
+use App\Services\FormatGamesService;
+use Illuminate\Support\Str;
 
 class IGDBService
 {
-    private $service;
+    private $request;
+    private $format;
 
-    public function __construct(APIRequestService $service)
+    public function __construct(APIRequestService $request, FormatGamesService $format)
     {
-        $this->service = $service;
+        $this->request = $request;
+        $this->format = $format;
     }
 
     public function getPopularGames()
     {
-        $games = $this->service->getPopularGames();
+        $games = $this->request->getPopularGames();
 
-        /* foreach ($games as $game) {
-            $popularGames[] = new PopularGameDataObject($game);
-        } */
+        $games = $this->format->formatPopularGames($games);
 
         return $games;
     }
 
     public function getReviewedGames()
     {
-        return $this->service->getReviewedGames();
+        return $this->request->getReviewedGames();
     }
 
     public function getComingGames()
     {
-        return $this->service->getComingGames();
+        return $this->request->getComingGames();
     }
 
     public function getGameReview(string $slug)
     {
-        $game = $this->service->getGame($slug);
+        $game = $this->request->getGame($slug);
 
         //$game = collect(new GameReviewDataObject($game[0]));
 

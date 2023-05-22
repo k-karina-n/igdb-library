@@ -1,4 +1,4 @@
-<div class="flex bg-blue rounded-lg shadow-md flex px-6 py-6">
+<div class="flex bg-blue rounded-lg shadow-md px-6 py-6">
     <div class="relative flex-none">
         <a href="/game_reviews/{{ $game['slug'] }}">
             <img alt="game-cover"
@@ -31,6 +31,6 @@
             @endforeach
         </div>
 
-        <p class="mt-6 text-white hidden md:block lg:block">{{ $game['summary'] }}</p>
+        <p class="mt-6 text-white hidden md:block lg:block h-32 overflow-auto">{{ $game['summary'] }}</p>
     </div>
 </div>
