@@ -28,12 +28,20 @@ class IGDBService
 
     public function getReviewedGames()
     {
-        return $this->request->getReviewedGames();
+        $games = $this->request->getReviewedGames();
+
+        $games = $this->format->formatReviewedGames($games);
+
+        return $games;
     }
 
     public function getComingGames()
     {
-        return $this->request->getComingGames();
+        $games = $this->request->getComingGames();
+
+        $games = $this->format->formatComingGames($games);
+
+        return $games;
     }
 
     public function getGameReview(string $slug)
