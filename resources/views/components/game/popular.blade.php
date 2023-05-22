@@ -3,7 +3,7 @@
         <a href="/game_reviews/{{ $game['slug'] }}">
             <img alt="game-cover"
                 class="w-44 h-56 rounded-lg shadow-md hover:opacity-75 transition ease-in-out duration-150"
-                src="{{ $game['coverImageUrl'] }}">
+                src="{{ $game['cover'] }}">
         </a>
 
         @if (isset($game['rating']))

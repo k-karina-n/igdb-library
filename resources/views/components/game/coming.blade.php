@@ -1,7 +1,7 @@
 <div class="flex">
     <a href="/game_reviews/{{ $game['slug'] }}">
         <img alt="game-cover" class="w-24 h-32 rounded-lg shadow-md hover:opacity-75 transition ease-in-out duration-150"
-            src="{{ $game['coverImageUrl'] }}">
+            src="{{ $game['cover'] }}">
     </a>
 
     <div class="ml-4">
@@ -15,7 +15,7 @@
         </p>
 
         <p class="mt-2 capitalize text-sm text-white">
-            {{ $game['releaseDate'] }}
+            {{ $game['first_release_date'] }}
         </p>
     </div>
 </div>

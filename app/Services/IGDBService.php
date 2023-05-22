@@ -48,12 +48,8 @@ class IGDBService
     {
         $game = $this->request->getGame($slug);
 
-        //$game = collect(new GameReviewDataObject($game[0]));
+        $game = $this->format->formatGameReview($game[0]);
 
-        /* if (!array_key_exists('storyline', $game[0])) {
-            $game[0]['storyline'] = 'Waiting for updates...';
-        } */
-
-        return $game[0];
+        return $game;
     }
 }
