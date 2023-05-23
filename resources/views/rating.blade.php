@@ -1,5 +1,5 @@
 <script>
-    window.addEventListener('load', function () {
+    window.addEventListener('load', function() {
         var bar = new ProgressBar.Circle('{{ $id }}', {
             color: 'gray',
             // This has to be the same size as the maximum width to
