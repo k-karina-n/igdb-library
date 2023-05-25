@@ -52,7 +52,7 @@ class FormatGamesService
             'involved_companies' => $game['involved_companies'][0]['company']['name'],
             'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
             'total_rating' => array_key_exists('total_rating', $game) ? round($game['total_rating']) : 0,
-            'total_rating_count' => array_key_exists('total_rating_count', $game) ? round($game['total_rating_count']) : 0,
+            'total_rating_count' => array_key_exists('total_rating_count', $game) && $game['total_rating_count'] <= 100 ? round($game['total_rating_count']) : 0,
             'storyline' => array_key_exists('storyline', $game) ? $game['storyline'] : 'Waiting for updates...',
             'videos' => 'https://youtube.com/watch/' . $game['videos'][0]['video_id'],
             'screenshots' => collect($game['screenshots'])->map(function ($screenshot) {

@@ -10,15 +10,15 @@
             <div id="{{ $game['slug'] }}"
                 class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full border border-zinc-600 shadow-md"
                 style="right: -20px; bottom: -20px">
-                    @push('scripts')
+                    {{-- @push('scripts')
                         @include('rating', [
                             'id' => '#' . $game['slug'],
                             'rating' => $game['rating'],
                         ])
-                    @endpush
-                {{-- <div class="font-semibold text-lg text-gray-700 flex justify-center items-center h-full">
+                    @endpush --}}
+                <div class="font-semibold text-lg text-gray-700 flex justify-center items-center h-full">
                     {{ $game['rating'] }}
-                </div> --}}
+                </div>
             </div>
         @endif
     </div>
