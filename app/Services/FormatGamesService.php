@@ -14,7 +14,9 @@ class FormatGamesService
                 'cover' => (array_key_exists('cover', $game)) ?
                     Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) : '/no-image.jpg',
                 'rating' => isset($game['rating']) ? round($game['rating']) . '%' : null,
-                'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
+                'platforms' => array_key_exists('platforms', $game) ?
+                    collect($game['platforms'])->pluck('abbreviation')->implode(', ')
+                    : 'Waiting for updates',
             ]);
         });
     }
@@ -49,12 +51,24 @@ class FormatGamesService
             'cover' => (array_key_exists('cover', $game)) ?
                 Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) : '/no-image.jpg',
             'genres' => collect($game['genres'])->pluck('name')->implode(', '),
-            'involved_companies' => $game['involved_companies'][0]['company']['name'],
-            'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
-            'total_rating' => array_key_exists('total_rating', $game) ? round($game['total_rating']) : 0,
-            'total_rating_count' => array_key_exists('total_rating_count', $game) && $game['total_rating_count'] <= 100 ? round($game['total_rating_count']) : 0,
-            'storyline' => array_key_exists('storyline', $game) ? $game['storyline'] : 'Waiting for updates...',
-            'videos' => 'https://youtube.com/watch/' . $game['videos'][0]['video_id'],
+            'involved_companies' => array_key_exists('involved_companies', $game) ?
+                $game['involved_companies'][0]['company']['name']
+                : 'Waiting for updates',
+            'platforms' => array_key_exists('platforms', $game) ?
+                collect($game['platforms'])->pluck('abbreviation')->implode(', ')
+                : 'Waiting for updates',
+            'total_rating' => array_key_exists('total_rating', $game) ?
+                round($game['total_rating'])
+                : 0,
+            'total_rating_count' => array_key_exists('total_rating_count', $game) && $game['total_rating_count'] <= 100 ?
+                round($game['total_rating_count'])
+                : 0,
+            'storyline' => array_key_exists('storyline', $game) ?
+                $game['storyline']
+                : 'Waiting for updates...',
+            'videos' => array_key_exists('videos', $game) ?
+                'https://youtube.com/watch/' . $game['videos'][0]['video_id']
+                : 'Waiting for updates',
             'screenshots' => collect($game['screenshots'])->map(function ($screenshot) {
                 return [
                     'huge' => Str::replaceFirst('thumb', 'screenshot_huge', $screenshot['url']),
