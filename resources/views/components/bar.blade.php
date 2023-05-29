@@ -2,18 +2,17 @@
     <div class="flex flex-col lg:flex-row items-center">
 
         <a href="{{ route('games') }}">
-            <div class="px-2 text-2xl uppercase text-white hover:text-dark">Game Library</div>
+            <div
+                class="text-6xl uppercase italic font-bold tracking-wide text-transparent 
+                bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                IGDB Library
+            </div>
         </a>
-
-        <div class="flex ml-0 lg:ml-16 space-x-8 mt-6 lg:mt-0">
-
-            {{ $slot }}
-
-        </div>
     </div>
+
     <div class="flex items-center mt-6 lg:mt-0">
 
-        <x-search-dropdown />
+        <x-search-input />
 
         <div class="ml-6">
             <a href="#">
@@ -21,5 +20,4 @@
             </a>
         </div>
     </div>
-
 </nav>

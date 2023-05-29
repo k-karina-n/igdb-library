@@ -15,8 +15,10 @@ module.exports = {
 
       colors: {
         'dark': '#191825',
-        'blue': '#8B9A46',
-        'gray': '#9BA4B5',
+      },
+
+      blur: {
+        xs: '2px',
       }
     },
   },

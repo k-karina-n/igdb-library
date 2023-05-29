@@ -1,6 +1,6 @@
 <div class="flex">
     <a href="/game_reviews/{{ $game['slug'] }}">
-        <img alt="game-cover" class="w-24 h-32 rounded-lg shadow-md hover:opacity-75 transition ease-in-out duration-150"
+        <img alt="game-cover" class="w-24 h-32 rounded-lg shadow-md hover:blur-xs transition ease-in-out duration-500"
             src="{{ $game['cover'] }}">
     </a>
 

@@ -1,8 +1,8 @@
 <x-layaout>
     <div class="px-28 container mx-auto">
         {{-- Game details --}}
-        <div class="pb-4 py-4 px-4 bg-blue rounded-lg shadow-md flex flex-col lg:flex-row">
-
+        <div
+            class="pb-4 py-4 px-4 flex flex-col lg:flex-row">
             <div class="flex-none">
                 <img src="{{ $game['cover'] }}" alt="cover" class="w-52 h-72 rounded-lg shadow-md">
 
@@ -15,7 +15,7 @@
                                 d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z">
                             </path>
                         </svg>
-                        <span class="ml-2">Play Trailer</span>
+                        <span class="ml-2">Play Trailer</span> {{--  <a href="#" class="btn-outline">Check more</a> --}}
                     </button>
 
                     <template x-if="isTrailerModalVisible">
@@ -92,7 +92,7 @@
                                 image='{{ $screenshot['huge'] }}'
                             ">
                         <img src="{{ $screenshot['big'] }}" alt="screenshot"
-                            class="hover:opacity-75 transition ease-in-out duration-150">
+                            class="hover:blur-xs transition ease-in-out duration-500">
                     </a>
                 @endforeach
             </div>

@@ -1,17 +1,13 @@
-<div
-    class="flex bg-gradient-to-r from-purple-500 to-pink-500 
-hover:bg-gradient-to-l 
-focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 rounded-lg shadow-md px-6 py-6">
+<div class="flex px-6 py-8 hover:rounded-lg hover:shadow-lg hover:shadow-purple-500 transition ease-in-out duration-500">
+
     <div class="relative flex-none">
         <a href="/game_reviews/{{ $game['slug'] }}">
-            <img alt="game-cover"
-                class="w-44 h-56 rounded-lg shadow-md hover:opacity-75 transition ease-in-out duration-150"
+            <img alt="game-cover" class="w-44 h-56 rounded-lg shadow-md hover:blur-xs transition ease-in-out duration-500"
                 src="{{ $game['cover'] }}">
         </a>
 
         @if (isset($game['rating']))
-            <div id="{{ $game['slug'] }}"
-                class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full shadow-md"
+            <div id="{{ $game['slug'] }}" class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full shadow-md"
                 style="right: -20px; bottom: -20px">
                 @push('scripts')
                     @include('rating', [
@@ -26,15 +22,19 @@ focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800
     </div>
 
     <div class="ml-12">
-        <a href="/game_reviews/{{ $game['slug'] }}"
-            class="block mt-4 capitalize text-lg text-white font-semibold leading-tight hover:transitoon ease-in-out duration-150 hover:text-gray hover:underline underline-offset-8 hover:pb-1 hover:leading-relaxed">
-            {{ $game['name'] }}
-        </a>
+        <div class="h-8">
+            <a href="/game_reviews/{{ $game['slug'] }}"
+                class="block mt-4 capitalize text-lg text-white font-semibold leading-tight 
+            hover:transitoon ease-in-out duration-150 hover:leading-relaxed
+            hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-purple-500 to-pink-500">
+                {{ $game['name'] }}
+            </a>
 
-        <div class="text-white mt-1">
-            {{ $game['platforms'] }}
+            <div class="text-slate-300 italic mt-1">
+                {{ $game['platforms'] }}
+            </div>
         </div>
 
-        <p class="mt-6 text-white hidden md:block lg:block h-32 overflow-auto">{{ $game['summary'] }}</p>
+        <p class="mt-12 text-white hidden md:block lg:block h-32 overflow-auto">{{ $game['summary'] }}</p>
     </div>
 </div>

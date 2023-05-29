@@ -12,7 +12,7 @@
         "
             @keydown.escape.window="isVisible = false" @keydown="isVisible = true"
             @keydown.shift.tab="isVisible = false"
-            class="bg-white text-sm rounded-full focus:outline-none focus:shadow-outline w-64 px-3 pl-8 py-1">
+            class="w-64 h-8 px-3 pl-8 py-1 bg-white text-sm rounded focus:outline-none focus:shadow-outline">
     </div>
 
     <div class="absolute top-0 flex items-center h-full ml-2">
