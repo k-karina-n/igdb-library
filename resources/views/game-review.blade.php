@@ -81,16 +81,33 @@
         </div>
 
         {{-- Images --}}
-        <div class="pb-4 py-4 px-4 bg-blue rounded-lg shadow-md relative images-container pb-12 mt-8">
+        <div x-data="{ isImageModalVisible: false, image: '' }"
+            class="images-container pb-4 py-4 px-4 bg-blue rounded-lg shadow-md relative pb-12 mt-8">
             <h2 class="text-white uppercase tracking-wide font-semibold">Images</h2>
             <div class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8">
                 @foreach ($game['screenshots'] as $screenshot)
-                    <a {{-- href="{{ $screenshot['huge'] }}" --}}>
+                    <a href="#"
+                        @click.prevent="
+                                isImageModalVisible = true
+                                image='{{ $screenshot['huge'] }}'
+                            ">
                         <img src="{{ $screenshot['big'] }}" alt="screenshot"
                             class="hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                 @endforeach
             </div>
+
+            <template x-if="isImageModalVisible">
+                <div style="background-color: rgba(0, 0, 0, .8);"
+                    class="z-50 fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto"
+                    @click="isImageModalVisible = false">
+                    <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto">
+                        <div class="modal-body px-8 py-8">
+                            <img :src="image" class="rounded-lg" alt="screenshot">
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
 
         {{-- Similar games --}}
