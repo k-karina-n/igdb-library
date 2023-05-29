@@ -28,7 +28,7 @@ class SearchDropdownController extends Controller
         });
 
         return view('components/search-results', [
-            'results' => $results,
+            'results' => $results
         ]);
     }
 }

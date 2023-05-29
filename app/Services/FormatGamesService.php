@@ -66,8 +66,8 @@ class FormatGamesService
             'storyline' => array_key_exists('storyline', $game) ?
                 $game['storyline']
                 : 'Waiting for updates...',
-            'videos' => array_key_exists('videos', $game) ?
-                'https://youtube.com/watch/' . $game['videos'][0]['video_id']
+            'trailer' => array_key_exists('videos', $game) ?
+                'https://youtube.com/embed/' . $game['videos'][0]['video_id']
                 : 'Waiting for updates',
             'screenshots' => collect($game['screenshots'])->map(function ($screenshot) {
                 return [
