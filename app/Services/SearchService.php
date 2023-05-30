@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Services\APIRequestService;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
+
 
 
 class SearchService
@@ -12,15 +14,9 @@ class SearchService
     {
     }
 
-    public function get($request)
+    public function get($input)
     {
-        $results = $this->service->makeRequest("search \"{$request}\"; 
-        fields name, slug, cover.url;
-        limit 5;");
-
-        if (count($results) == 0) {
-            return $results;
-        }
+        $results = $this->service->getSearchResults($input);
 
         return $this->format($results);
     }

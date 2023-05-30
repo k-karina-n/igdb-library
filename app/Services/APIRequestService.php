@@ -66,4 +66,11 @@ class APIRequestService
             similar_games.platforms.abbreviation,similar_games.slug; 
             where slug=\"{$slug}\";");
     }
+
+    public function getSearchResults(string $input)
+    {
+        return $this->makeRequest("search \"{$input}\"; 
+        fields name, slug, cover.url;
+        limit 5;");
+    }
 }

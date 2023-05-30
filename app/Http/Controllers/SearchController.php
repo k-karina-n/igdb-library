@@ -9,8 +9,11 @@ use Illuminate\Contracts\View\View;
 
 class SearchController extends Controller
 {
-    public function __construct(private Request $request)
+    public $request;
+
+    public function __construct(Request $request)
     {
+        $this->request = $request->search;
     }
 
     public function get(SearchService $service): View
