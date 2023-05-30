@@ -1,21 +1,18 @@
-<div class="flex">
+<div class="flex {{-- ml-4 mt-12  --}} px-4 py-4
+    hover:rounded-lg hover:shadow-lg hover:shadow-pink-500 transition ease-in-out duration-500">
     <a href="/game_reviews/{{ $game['slug'] }}">
-        <img alt="game-cover" class="w-24 h-32 rounded-lg shadow-md hover:blur-xs transition ease-in-out duration-500"
+        <img alt="game-cover" class="w-24 h-32 rounded-lg shadow-md hover:blur-xs duration-500"
             src="{{ $game['cover'] }}">
     </a>
 
-    <div class="ml-4">
+    <div class="flex flex-col justify-center ml-2">
         <a href="/game_reviews/{{ $game['slug'] }}"
-            class="w-40 block mt-4 capitalize text-sm text-white font-semibold hover:transitoon ease-in-out duration-150 hover:text-gray hover:underline underline-offset-8 hover:pb-1 hover:leading-relaxed">
+            class="w-40 block px-2 py-2 
+        capitalize text-lg text-center font-semibold leading-tight
+        text-transparent bg-clip-text bg-gradient-to-r from-purple-500/50 to-pink-500/50
+        hover:-translate-y-1 hover:scale-105 transition ease-in-out duration-300
+        hover:bg-gradient-to-l">
             {{ $game['name'] }}
         </a>
-
-        <p class="mt-2 capitalize text-sm text-white">
-            {{ $game['platforms'] }}
-        </p>
-
-        <p class="mt-2 capitalize text-sm text-white">
-            {{ $game['first_release_date'] }}
-        </p>
     </div>
 </div>

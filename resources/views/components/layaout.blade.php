@@ -17,10 +17,10 @@
         {{ $slot }}
     </main>
 
-    <footer class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-        <div
-            class="flex justify-center items-center mx-auto px-4 py-6
-            text-white uppercase italic font-bold tracking-wide">
+    <footer>
+        <div class="flex justify-center items-center mx-auto px-4 py-6
+            uppercase italic font-bold tracking-wide text-transparent 
+            bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
             Powered By IGDB API
         </div>
     </footer>

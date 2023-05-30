@@ -1,4 +1,6 @@
-<div class="flex px-6 py-8 hover:rounded-lg hover:shadow-lg hover:shadow-purple-500 transition ease-in-out duration-500">
+<div
+    class="flex px-6 py-8 rounded-lg shadow-lg shadow-purple-500 
+    hover:rounded-lg hover:shadow-pink-500 transition ease-in-out duration-500">
 
     <div class="relative flex-none">
         <a href="/game_reviews/{{ $game['slug'] }}">
@@ -25,12 +27,12 @@
         <div class="h-8">
             <a href="/game_reviews/{{ $game['slug'] }}"
                 class="block mt-4 capitalize text-lg text-white font-semibold leading-tight 
-            hover:transitoon ease-in-out duration-150 hover:leading-relaxed
+            hover:translate-x-1 hover:scale-100 transition ease-in-out duration-300
             hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-purple-500 to-pink-500">
                 {{ $game['name'] }}
             </a>
 
-            <div class="text-slate-300 italic mt-1">
+            <div class="text-slate-300 italic mt-2">
                 {{ $game['platforms'] }}
             </div>
         </div>

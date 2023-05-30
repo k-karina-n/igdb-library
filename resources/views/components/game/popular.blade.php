@@ -9,7 +9,7 @@
 
     <a href="/game_reviews/{{ $game['slug'] }}"
         class="block mt-4 text-white text-base font-semibold leading-tight 
-        hover:transitoon ease-in-out duration-150 hover:leading-relaxed
+        hover:-translate-y-1 hover:scale-100 transition ease-in-out duration-300
         hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-purple-500 to-pink-500">
         {{ $game['name'] }}
     </a>

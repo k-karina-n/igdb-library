@@ -7,7 +7,7 @@
             Popular games
         </h2>
 
-        <div hx-get="/popularGames" hx-trigger="revealed" hx-swap="outerHTML">
+        <div hx-get="/popularGames" hx-trigger="revealed" hx-swap="outerHTML" hx-indicator=".htmx-indicator" >
             <img class="htmx-indicator w-8 h-8 mt-2 ml-4 text-pink-500" src="/ball-triangle.svg">
         </div>
 
@@ -18,7 +18,7 @@
                 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
                     Recently reviewed</h2>
                 <div class="container space-y-12 mt-6">
-                    <div hx-get="/reviewedGames" hx-trigger="revealed" hx-swap="outerHTML">
+                    <div hx-get="/reviewedGames" hx-trigger="revealed" hx-swap="outerHTML" hx-indicator=".htmx-indicator">
                         <img class="htmx-indicator w-8 h-8 ml-4" src="/ball-triangle.svg">
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
                     Coming soon</h2>
                 <div class="container space-y-10 mt-6">
-                    <div hx-get="/comingGames" hx-trigger="revealed" hx-swap="outerHTML">
+                    <div hx-get="/comingGames" hx-trigger="revealed" hx-swap="outerHTML" hx-indicator=".htmx-indicator">
                         <img class="htmx-indicator w-8 h-8 ml-4" src="/ball-triangle.svg">
                     </div>
                 </div>

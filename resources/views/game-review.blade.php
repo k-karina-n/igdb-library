@@ -114,7 +114,8 @@
         <div class="pb-4 py-4 px-4 bg-blue rounded-lg shadow-md container mt-8">
             <h2 class="text-white uppercase tracking-wide font-semibold">Similar Games</h2>
             <div
-                class="overflow-y-auto overflow-x-hidden h-96 text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10">
+                class="h-96 text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10
+                overflow-x-hidden overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
                 @foreach ($game['similar_games'] as $game)
                     <x-game.popular :game="$game" />
                 @endforeach
