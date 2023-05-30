@@ -74,7 +74,7 @@ class FormatGamesService
                     'huge' => Str::replaceFirst('thumb', 'screenshot_huge', $screenshot['url']),
                     'big' => Str::replaceFirst('thumb', 'screenshot_big', $screenshot['url']),
                 ];
-            })->take(9),
+            })->take(6),
             'similar_games' => $this->formatPopularGames($game['similar_games']),
         ]);
     }

@@ -1,8 +1,7 @@
 <x-layaout>
     <div class="px-28 container mx-auto">
         {{-- Game details --}}
-        <div
-            class="pb-4 py-4 px-4 flex flex-col lg:flex-row">
+        <div class="pb-4 py-4 px-4 flex flex-col lg:flex-row">
             <div class="flex-none">
                 <img src="{{ $game['cover'] }}" alt="cover" class="w-52 h-72 rounded-lg shadow-md">
 
@@ -39,10 +38,12 @@
             </div>
 
             <div class="lg:ml-12 xl:mr-64">
-                <h2 class="font-semibold capitalize text-white text-4xl mt-1">
+                <h2
+                    class="pb-2 text-4xl font-semibold capitalize italic text-transparent 
+                        bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
                     {{ $game['name'] }}
                 </h2>
-                <div class="mt-3 text-white">
+                <div class="mt-3 text-slate-300">
                     <span>{{ $game['genres'] }}</span>
                     <span class="font-bold text-xl">|</span>
                     <span>{{ $game['involved_companies'] }}</span>
@@ -76,14 +77,17 @@
                     </div>
                 </div>
 
-                <p class="mt-12 text-white text-justify">{{ $game['storyline'] }}</p>
+                <p class="mt-12 h-40 text-white text-justify overflow-y-scroll">{{ $game['storyline'] }}</p>
             </div>
         </div>
 
         {{-- Images --}}
         <div x-data="{ isImageModalVisible: false, image: '' }"
-            class="images-container pb-4 py-4 px-4 bg-blue rounded-lg shadow-md relative pb-12 mt-8">
-            <h2 class="text-white uppercase tracking-wide font-semibold">Images</h2>
+            class="images-container relative pb-4 py-4 px-4 mt-8">
+            <h2
+                class="text-2xl uppercase italic font-bold tracking-wide text-transparent 
+                bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
+                Images</h2>
             <div class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8">
                 @foreach ($game['screenshots'] as $screenshot)
                     <a href="#"
@@ -92,7 +96,7 @@
                                 image='{{ $screenshot['huge'] }}'
                             ">
                         <img src="{{ $screenshot['big'] }}" alt="screenshot"
-                            class="hover:blur-xs transition ease-in-out duration-500">
+                            class="rounded-lg hover:blur-xs transition ease-in-out duration-500">
                     </a>
                 @endforeach
             </div>
@@ -111,10 +115,16 @@
         </div>
 
         {{-- Similar games --}}
-        <div class="pb-4 py-4 px-4 bg-blue rounded-lg shadow-md container mt-8">
-            <h2 class="text-white uppercase tracking-wide font-semibold">Similar Games</h2>
+        <div class="container pb-4 py-4 px-4 mt-8">
+
+            <h2
+                class="text-2xl uppercase italic font-bold tracking-wide text-transparent 
+                bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
+                Similar Games
+            </h2>
+
             <div
-                class="h-96 text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10
+                class="h-80 mt-4 text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10
                 overflow-x-hidden overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
                 @foreach ($game['similar_games'] as $game)
                     <x-game.popular :game="$game" />

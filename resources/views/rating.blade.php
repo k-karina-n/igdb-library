@@ -1,7 +1,7 @@
 <script>
     window.addEventListener('load', function() {
         var bar = new ProgressBar.Circle('{{ $id }}', {
-            color: 'gray',
+            color: '#191825',
             // This has to be the same size as the maximum width to
             // prevent clipping
             strokeWidth: 6,
@@ -12,11 +12,11 @@
                 autoStyleContainer: false
             },
             from: {
-                color: '#F2CD5C',
+                color: '#a855f7',
                 width: 7
             },
             to: {
-                color: '#F2CD5C',
+                color: '#ec4899',
                 width: 7
             },
             // Set default step function for all animate calls
