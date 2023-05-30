@@ -22,7 +22,7 @@
         </svg>
     </div>
 
-    <span hx-trigger="click" class="htmx-indicator absolute h-3 w-3 top-0 right-0 mr-4 mt-2">
+    <span hx-trigger="keyup changed delay:500ms" class="htmx-indicator absolute h-3 w-3 top-0 right-0 mr-4 mt-2">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
         <span class="absolute inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
     </span>

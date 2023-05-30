@@ -7,14 +7,16 @@
 
                 <div x-data="{ isTrailerModalVisible: false }" class="mt-6 mx-6">
                     <button @click="isTrailerModalVisible = true"
-                        class="flex bg-gray rounded-lg shadow-md text-white font-semibold px-4 py-4 hover:bg-pink-200 rounded transition ease-in-out duration-150">
+                        class="flex px-4 py-4 rounded-lg shadow-md text-white font-semibold
+                        bg-gradient-to-r from-purple-500/75 to-pink-500/75
+                        hover:bg-gradient-to-l duration-150">
                         <svg class="w-6 fill-current" viewBox="0 0 24 24">
                             <path d="M0 0h24v24H0z" fill="none"></path>
                             <path
                                 d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z">
                             </path>
                         </svg>
-                        <span class="ml-2">Play Trailer</span> {{--  <a href="#" class="btn-outline">Check more</a> --}}
+                        <span class="ml-2">Play Trailer</span>
                     </button>
 
                     <template x-if="isTrailerModalVisible">
@@ -70,6 +72,7 @@
                                 @include('rating', [
                                     'id' => '#criticRating',
                                     'rating' => $game['total_rating_count'],
+                                    'event' => null
                                 ])
                             @endpush
                         </div>
@@ -82,8 +85,7 @@
         </div>
 
         {{-- Images --}}
-        <div x-data="{ isImageModalVisible: false, image: '' }"
-            class="images-container relative pb-4 py-4 px-4 mt-8">
+        <div x-data="{ isImageModalVisible: false, image: '' }" class="images-container relative pb-4 py-4 px-4 mt-8">
             <h2
                 class="text-2xl uppercase italic font-bold tracking-wide text-transparent 
                 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">

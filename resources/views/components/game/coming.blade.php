@@ -1,5 +1,5 @@
-<div class="flex {{-- ml-4 mt-12  --}} px-4 py-4
-    hover:rounded-lg hover:shadow-lg hover:shadow-pink-500 transition ease-in-out duration-500">
+<div class="flex {{-- ml-4 mt-12  --}} px-4 py-4 rounded-lg
+    hover:shadow-lg hover:shadow-purple-500 transition ease-in-out duration-500">
     <a href="/game_reviews/{{ $game['slug'] }}">
         <img alt="game-cover" class="w-24 h-32 rounded-lg shadow-md hover:blur-xs duration-500"
             src="{{ $game['cover'] }}">

@@ -9,7 +9,8 @@
         </a>
 
         @if (isset($game['rating']))
-            <div id="{{ $game['slug'] }}" class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full shadow-md"
+            <div id="{{ $game['slug'] }}" 
+                class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full shadow-md"
                 style="right: -20px; bottom: -20px">
                 @push('scripts')
                     @include('rating', [
