@@ -78,4 +78,14 @@ class FormatGamesService
             'similar_games' => $this->formatPopularGames($game['similar_games']),
         ]);
     }
+
+    public function formatSearchResults($games)
+    {
+        return collect($games)->map(function ($game) {
+            return collect($game)->merge([
+                'cover' => (array_key_exists('cover', $game)) ?
+                    Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']) : '/no-image.jpg',
+            ]);
+        });
+    }
 }

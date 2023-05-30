@@ -4,17 +4,13 @@ namespace App\Services;
 
 use App\Services\APIRequestService;
 use App\Services\FormatGamesService;
-use Illuminate\Support\Str;
 
 class IGDBService
 {
-    private $request;
-    private $format;
-
-    public function __construct(APIRequestService $request, FormatGamesService $format)
-    {
-        $this->request = $request;
-        $this->format = $format;
+    public function __construct(
+        private APIRequestService $request,
+        private FormatGamesService $format
+    ) {
     }
 
     public function getPopularGames()

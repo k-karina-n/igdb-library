@@ -3,31 +3,20 @@
 namespace App\Services;
 
 use App\Services\APIRequestService;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Http;
-
-
+use App\Services\FormatGamesService;
 
 class SearchService
 {
-    public function __construct(private APIRequestService $service)
-    {
+    public function __construct(
+        private APIRequestService $request,
+        private FormatGamesService $format
+    ) {
     }
 
     public function get($input)
     {
-        $results = $this->service->getSearchResults($input);
+        $results = $this->request->getSearchResults($input);
 
-        return $this->format($results);
-    }
-
-    public function format($results)
-    {
-        return collect($results)->map(function ($game) {
-            return collect($game)->merge([
-                'cover' => (array_key_exists('cover', $game)) ?
-                    Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']) : '/no-image.jpg',
-            ]);
-        });
+        return $this->format->formatSearchResults($results);
     }
 }
