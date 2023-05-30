@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Services\APIRequestService;
 use App\Services\FormatGamesService;
+use Illuminate\Support\Facades\Cache;
 
 class IGDBService
 {
@@ -15,11 +16,18 @@ class IGDBService
 
     public function getPopularGames()
     {
-        $games = $this->request->getPopularGames();
-
-        $games = $this->format->formatPopularGames($games);
+        $games = Cache::remember('popularGames', 10, function () {
+            return $this->popular();
+        });
 
         return $games;
+    }
+
+    public function popular()
+    {
+        $games = $this->request->getPopularGames();
+
+        return $this->format->formatPopularGames($games);
     }
 
     public function getReviewedGames()

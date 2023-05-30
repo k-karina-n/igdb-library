@@ -9,17 +9,10 @@ use Illuminate\Contracts\View\View;
 
 class SearchController extends Controller
 {
-    public $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request->search;
-    }
-
-    public function get(SearchService $service): View
+    public function __invoke(SearchService $service, Request $request): View
     {
         return view('components/search-results', [
-            'results' => $service->get($this->request)
+            'results' => $service->get($request->search)
         ]);
     }
 }

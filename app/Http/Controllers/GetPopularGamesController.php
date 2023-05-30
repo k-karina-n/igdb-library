@@ -7,14 +7,10 @@ use Illuminate\Contracts\View\View;
 
 class GetPopularGamesController extends Controller
 {
-    public function __construct(private IGDBService $service)
-    {
-    }
-
-    public function get(): View
+    public function __invoke(IGDBService $service): View
     {
         return view('popular-section', [
-            'popularGames' => $this->service->getPopularGames(),
+            'popularGames' => $service->getPopularGames(),
         ]);
     }
 }

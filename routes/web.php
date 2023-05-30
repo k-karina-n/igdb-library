@@ -11,8 +11,8 @@ use App\Http\Controllers\SearchController;
 Route::get('/', [NavigationController::class, 'index'])->name('games');
 Route::get('/game_reviews/{slug}', [NavigationController::class, 'getGameReview']);
 
-Route::get('/popularGames', [GetPopularGamesController::class, 'get']);
-Route::get('/reviewedGames', [GetRecentlyReviewedGamesController::class, 'get']);
-Route::get('/comingGames', [GetComingSoonGamesController::class, 'get']);
+Route::get('/popularGames', GetPopularGamesController::class);
+Route::get('/reviewedGames', GetRecentlyReviewedGamesController::class);
+Route::get('/comingGames', GetComingSoonGamesController::class);
 
-Route::get('/search', [SearchController::class, 'get']);
+Route::get('/search', SearchController::class);
