@@ -5,7 +5,7 @@ use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\GetPopularGamesController;
 use App\Http\Controllers\GetRecentlyReviewedGamesController;
 use App\Http\Controllers\GetComingSoonGamesController;
-use App\Http\Controllers\SearchDropdownController;
+use App\Http\Controllers\SearchController;
 
 
 Route::get('/', [NavigationController::class, 'index'])->name('games');
@@ -15,4 +15,4 @@ Route::get('/popularGames', [GetPopularGamesController::class, 'get']);
 Route::get('/reviewedGames', [GetRecentlyReviewedGamesController::class, 'get']);
 Route::get('/comingGames', [GetComingSoonGamesController::class, 'get']);
 
-Route::get('/search', [SearchDropdownController::class, 'get']);
+Route::get('/search', [SearchController::class, 'get']);

@@ -8,26 +8,30 @@ use Illuminate\Support\Str;
 
 class SearchService
 {
-    private $service;
-
-    public function __construct(APIRequestService $service)
+    public function __construct(private APIRequestService $service)
     {
-        $this->service = $service;
     }
 
     public function get($request)
     {
-        $search = $this->service->makeRequest("search \"{$request}\"; 
+        $results = $this->service->makeRequest("search \"{$request}\"; 
         fields name, slug, cover.url;
         limit 5;");
 
-        $results =  collect($search)->map(function ($game) {
+        if (count($results) == 0) {
+            return $results;
+        }
+
+        return $this->format($results);
+    }
+
+    public function format($results)
+    {
+        return collect($results)->map(function ($game) {
             return collect($game)->merge([
                 'cover' => (array_key_exists('cover', $game)) ?
                     Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']) : '/no-image.jpg',
             ]);
         });
-
-        return $results;
     }
 }

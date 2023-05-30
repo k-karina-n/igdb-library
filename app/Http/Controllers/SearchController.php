@@ -7,13 +7,10 @@ use App\Services\SearchService;
 use Illuminate\Contracts\View\View;
 
 
-class SearchDropdownController extends Controller
+class SearchController extends Controller
 {
-    private $request;
-
-    public function __construct(Request $request)
+    public function __construct(private Request $request)
     {
-        $this->request = $request->search;
     }
 
     public function get(SearchService $service): View

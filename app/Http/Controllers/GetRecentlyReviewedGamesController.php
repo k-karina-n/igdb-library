@@ -7,11 +7,8 @@ use Illuminate\Contracts\View\View;
 
 class GetRecentlyReviewedGamesController extends Controller
 {
-    private $service;
-
-    public function __construct(IGDBService $service)
+    public function __construct(private IGDBService $service)
     {
-        $this->service = $service;
     }
 
     public function get(): View
