@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
+use App\Services\IGDBService;
 
 class NavigationController extends Controller
 {
@@ -12,13 +13,10 @@ class NavigationController extends Controller
         return view('pages/index');
     }
 
-    public function getReviewsPage(): View
+    public function getGameReview(IGDBService $service, string $slug): View
     {
-        return view('pages/reviews');
-    }
-
-    public function getComingSoonPage(): View
-    {
-        return view('pages/coming-soon');
+        return view('game-review', [
+            'game' => $service->getGameReview($slug),
+        ]);
     }
 }

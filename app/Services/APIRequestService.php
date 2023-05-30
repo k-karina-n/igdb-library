@@ -18,7 +18,7 @@ class APIRequestService
         $this->after = Carbon::now()->addMonths(2)->timestamp;
     }
 
-    private function makeRequest($body)
+    public function makeRequest($body)
     {
         return Http::withHeaders(config('services.igdb'))
             ->withBody("{$body}")
