@@ -21,7 +21,7 @@ class APIRequestService
     public function makeRequest($body)
     {
         return Http::withHeaders(config('services.igdb'))
-            ->withBody("{$body}")
+            ->withBody($body)
             ->post('https://api.igdb.com/v4/games')
             ->json();
     }

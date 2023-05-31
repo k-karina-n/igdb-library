@@ -1,5 +1,4 @@
-<div class="flex px-6 py-8 rounded-lg
-    hover:shadow-lg hover:shadow-purple-500 transition ease-in-out duration-500">
+<div class="flex px-6 py-8 rounded-lg">
 
     <div class="relative flex-none">
         <a href="/game_reviews/{{ $game['slug'] }}">

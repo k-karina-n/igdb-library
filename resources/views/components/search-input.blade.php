@@ -2,7 +2,7 @@
 
     <div>
         <input hx-get="/search" hx-trigger="keyup changed delay:500ms, search" hx-target="#search-results"
-            hx-indicator=".htmx-indicator" name="search" placeholder="Search (Press '/' to focus)"
+            hx-indicator="#red-indicator" name="search" placeholder="Search (Press '/' to focus)"
             @focus="isVisible = true" x-ref="search"
             @keydown.window="
             if (event.keyCode === 191) {
@@ -22,7 +22,7 @@
         </svg>
     </div>
 
-    <span hx-trigger="keyup changed delay:500ms" class="htmx-indicator absolute h-3 w-3 top-0 right-0 mr-4 mt-2">
+    <span id="red-indicator" class="htmx-indicator absolute h-3 w-3 top-0 right-0 mr-4 mt-2">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
         <span class="absolute inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
     </span>
