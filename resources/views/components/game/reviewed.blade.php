@@ -1,6 +1,5 @@
-<div
-    class="flex px-6 py-8 rounded-lg shadow-lg shadow-purple-500 
-    hover:rounded-lg hover:shadow-pink-500 transition ease-in-out duration-500">
+<div class="flex px-6 py-8 rounded-lg
+    hover:shadow-lg hover:shadow-purple-500 transition ease-in-out duration-500">
 
     <div class="relative flex-none">
         <a href="/game_reviews/{{ $game['slug'] }}">
@@ -9,17 +8,21 @@
         </a>
 
         @if (isset($game['rating']))
-            <div id="{{ $game['slug'] }}" 
-                class="absolute bottom-0 right-0 w-14 h-14 bg-zinc-100 rounded-full shadow-md"
+            <div id="{{ $game['slug'] }}"
+                class="absolute bottom-0 right-0 w-14 h-14 bg-dark rounded-full shadow-md shadow-purple-500"
                 style="right: -20px; bottom: -20px">
-                @push('scripts')
+                {{-- @push('scripts')
                     @include('rating', [
                         'id' => '#' . $game['slug'],
                         'rating' => $game['rating'],
                     ])
-                @endpush
-                {{--  <div class="font-semibold text-lg text-gray-700 flex justify-center items-center h-full">
-                </div> --}}
+                @endpush --}}
+                <div
+                    class="flex justify-center items-center h-full
+                 font-semibold text-lg text-transparent bg-clip-text 
+                 bg-gradient-to-r from-purple-500 to-pink-500">
+                    {{ $game['rating'] }}
+                </div>
             </div>
         @endif
     </div>

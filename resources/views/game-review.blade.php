@@ -55,7 +55,7 @@
 
                 <div class="mt-8 flex flex-wrap items-center space-x-12">
                     <div class="flex items-center space-x-2">
-                        <div id="memberRating" class="w-14 h-14 bg-zinc-100 rounded-full relative text-md">
+                        <div id="memberRating" class="w-14 h-14 rounded-full relative text-md">
                             @push('scripts')
                                 @include('rating', [
                                     'id' => '#memberRating',
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="flex items-center space-x-2">
-                        <div id="criticRating" class="w-14 h-14 bg-zinc-100 rounded-full relative text-md">
+                        <div id="criticRating" class="w-14 h-14 rounded-full relative text-md">
                             @push('scripts')
                                 @include('rating', [
                                     'id' => '#criticRating',
