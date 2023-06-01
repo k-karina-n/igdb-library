@@ -25,12 +25,12 @@ class APIService
         return new APIService($path);
     }
 
-    public function get() //: Collection
+    public function get(): Collection
     {
         return Http::withHeaders(config('services.igdb'))
             ->withBody($this->query)
             ->post(self::BASE_URL . '/' . $this->path)
-            ->json();
+            ->collect();
     }
 
     public function search(string $input): APIService
