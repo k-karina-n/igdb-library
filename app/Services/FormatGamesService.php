@@ -9,7 +9,7 @@ class FormatGamesService
 {
     public function formatPopularGames($games)
     {
-        return $games->map(function ($game) {
+        return collect($games)->map(function ($game) {
             return collect($game)->merge([
                 'cover' => (array_key_exists('cover', $game)) ?
                     Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) : '/no-image.jpg',
@@ -23,7 +23,7 @@ class FormatGamesService
 
     public function formatReviewedGames($games)
     {
-        return $games->map(function ($game) {
+        return collect($games)->map(function ($game) {
             return collect($game)->merge([
                 'cover' => (array_key_exists('cover', $game)) ?
                     Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) : '/no-image.jpg',
@@ -35,7 +35,7 @@ class FormatGamesService
 
     public function formatComingGames($games)
     {
-        return $games->map(function ($game) {
+        return collect($games)->map(function ($game) {
             return collect($game)->merge([
                 'cover' => (array_key_exists('cover', $game)) ?
                     Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']) : '/no-image.jpg',
@@ -47,7 +47,7 @@ class FormatGamesService
 
     public function formatGameReview($game)
     {
-        return $game->merge([
+        return collect($game)->merge([
             'cover' => (array_key_exists('cover', $game)) ?
                 Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) : '/no-image.jpg',
             'genres' => collect($game['genres'])->pluck('name')->implode(', '),
@@ -81,7 +81,7 @@ class FormatGamesService
 
     public function formatSearchResults($games)
     {
-        return $games->map(function ($game) {
+        return collect($games)->map(function ($game) {
             return collect($game)->merge([
                 'cover' => (array_key_exists('cover', $game)) ?
                     Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']) : '/no-image.jpg',

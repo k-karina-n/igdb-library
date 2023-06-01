@@ -21,12 +21,24 @@ class IGDBService
         $this->after = Carbon::now()->addMonths(2)->timestamp;
     }
 
+    private function getPlatformsString(array $platforms): string
+    {
+        return implode(',', $platforms);
+    }
+
     public function getPopularGames()
     {
         /* return Cache::remember('popularGames', now()->addHours(1), function () {
             $games = $this->request->getPopularGames();
             return $this->format->formatPopularGames($games);
         }); */
+        $platforms = $this->getPlatformsString([
+            ApiService::PC_PLATFORM,
+            ApiService::PS4_PLATFORM,
+            ApiService::PS5_PLATFORM,
+            ApiService::XONE_PLATFORM,
+        ]);
+
         $games = APIService::url('games')
             ->select([
                 'name',
@@ -35,11 +47,11 @@ class IGDBService
                 'slug',
                 'rating',
             ])->where([
-                "platforms = (6,48,49,167)",
+                "platforms = ({$platforms})",
                 "& first_release_date >= {$this->before}",
                 "& first_release_date < {$this->after}",
                 "& total_rating_count > 5"
-            ])->sort('total_rating desc')
+            ])->sortDesc('total_rating')
             ->limit(10)
             ->get();
 
@@ -53,6 +65,13 @@ class IGDBService
             return $this->format->formatReviewedGames($games);
         }); */
 
+        $platforms = $this->getPlatformsString([
+            ApiService::PC_PLATFORM,
+            ApiService::PS4_PLATFORM,
+            ApiService::PS5_PLATFORM,
+            ApiService::XONE_PLATFORM,
+        ]);
+
         $games = APIService::url('games')
             ->select([
                 'name',
@@ -62,11 +81,11 @@ class IGDBService
                 'slug',
                 'summary'
             ])->where([
-                "platforms = (6,48,49,167)",
+                "platforms = ({$platforms})",
                 "& first_release_date >= {$this->before}",
                 "& first_release_date < {$this->current}",
                 "& rating_count > 5"
-            ])->sort('total_rating desc')
+            ])->sortDesc('total_rating')
             ->limit(3)
             ->get();
 
@@ -79,6 +98,12 @@ class IGDBService
             $games = $this->request->getReviewedGames();
             return $this->format->formatReviewedGames($games);
         }); */
+        $platforms = $this->getPlatformsString([
+            ApiService::PC_PLATFORM,
+            ApiService::PS4_PLATFORM,
+            ApiService::PS5_PLATFORM,
+            ApiService::XONE_PLATFORM,
+        ]);
 
         $games = APIService::url('games')
             ->select([
@@ -88,9 +113,9 @@ class IGDBService
                 'first_release_date',
                 'slug'
             ])->where([
-                "platforms = (6,48,49,167)",
+                "platforms = ({$platforms})",
                 "& first_release_date > {$this->current}"
-            ])->sort('first_release_date asc')
+            ])->sortAsc('first_release_date')
             ->limit(5)
             ->get();
 

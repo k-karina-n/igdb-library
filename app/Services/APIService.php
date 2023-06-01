@@ -35,7 +35,7 @@ class APIService
 
     public function search(string $input): APIService
     {
-        $this->query .= 'search ' . "\"{$input}\"" . ';';
+        $this->query .= "search \"{$input}\";";
 
         return $this;
     }
@@ -54,16 +54,23 @@ class APIService
         return $this;
     }
 
-    public function sort(string $condition): APIService
+    public function sortAsc(string $condition): APIService
     {
-        $this->query .= 'sort ' . $condition . ';';
+        $this->query .= "sort {$condition} asc;";
+
+        return $this;
+    }
+
+    public function sortDesc(string $condition): APIService
+    {
+        $this->query .= "sort {$condition} desc;";
 
         return $this;
     }
 
     public function limit(int $number): APIService
     {
-        $this->query .= 'limit ' . $number . ';';
+        $this->query .= "limit {$number};";
 
         return $this;
     }
