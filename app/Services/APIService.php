@@ -49,7 +49,13 @@ class APIService
 
     public function where(array $fields): APIService
     {
-        $this->query .= 'where ' . implode(' ', $fields) . ';';
+        $this->query .= 'where ';
+
+        foreach ($fields as $field) {
+            $this->query .= implode(' ', $field);
+        }
+
+        $this->query .= ';';
 
         return $this;
     }

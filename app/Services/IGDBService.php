@@ -23,9 +23,15 @@ class IGDBService
 
     private function getPlatformsString(array $platforms): string
     {
-        return implode(',', $platforms);
-    }
+        $platforms = implode(',', $platforms);
 
+        return "({$platforms})";
+    }
+    /* 
+                "platforms = {$platforms}",
+                "& first_release_date >= {$this->before}",
+                "& first_release_date < {$this->after}",
+                "& total_rating_count > 5"*/
     public function getPopularGames()
     {
         /* return Cache::remember('popularGames', now()->addHours(1), function () {
@@ -47,10 +53,10 @@ class IGDBService
                 'slug',
                 'rating',
             ])->where([
-                "platforms = ({$platforms})",
-                "& first_release_date >= {$this->before}",
-                "& first_release_date < {$this->after}",
-                "& total_rating_count > 5"
+                ['platforms', '=', $platforms,],
+                ['& first_release_date', '>=', $this->before],
+                ['& first_release_date', '<', $this->after],
+                ['& total_rating_count', '>', 5],
             ])->sortDesc('total_rating')
             ->limit(10)
             ->get();
@@ -81,10 +87,10 @@ class IGDBService
                 'slug',
                 'summary'
             ])->where([
-                "platforms = ({$platforms})",
-                "& first_release_date >= {$this->before}",
-                "& first_release_date < {$this->current}",
-                "& rating_count > 5"
+                ['platforms', '=', $platforms,],
+                ['& first_release_date', '>=', $this->before],
+                ['& first_release_date', '<', $this->current],
+                ['& rating_count', '>', 5],
             ])->sortDesc('total_rating')
             ->limit(3)
             ->get();
@@ -113,8 +119,8 @@ class IGDBService
                 'first_release_date',
                 'slug'
             ])->where([
-                "platforms = ({$platforms})",
-                "& first_release_date > {$this->current}"
+                ['platforms', '=', $platforms,],
+                ['& first_release_date', '>', $this->current],
             ])->sortAsc('first_release_date')
             ->limit(5)
             ->get();
@@ -138,7 +144,7 @@ class IGDBService
                 'similar_games.name', 'similar_games.cover.url', 'similar_games.rating',
                 'similar_games.platforms.abbreviation', 'similar_games.slug'
             ])->where([
-                "slug=\"{$slug}\""
+                ['slug', '=', "\"{$slug}\""],
             ])->get();
 
         return $this->format->formatGameReview($game[0]);
