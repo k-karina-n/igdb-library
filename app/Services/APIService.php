@@ -52,10 +52,10 @@ class APIService
         $this->query .= 'where ';
 
         foreach ($fields as $field) {
-            $this->query .= implode(' ', $field);
+            $this->query .= implode(' ', $field) . '&';
         }
 
-        $this->query .= ';';
+        $this->query = rtrim($this->query, "&") . ';';
 
         return $this;
     }

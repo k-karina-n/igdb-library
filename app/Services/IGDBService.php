@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Services\APIService;
 use App\Services\FormatGamesService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Collection;
 use Carbon\Carbon;
 
 
@@ -27,108 +28,97 @@ class IGDBService
 
         return "({$platforms})";
     }
-    /* 
-                "platforms = {$platforms}",
-                "& first_release_date >= {$this->before}",
-                "& first_release_date < {$this->after}",
-                "& total_rating_count > 5"*/
-    public function getPopularGames()
+
+    public function getPopularGames(): Collection
     {
-        /* return Cache::remember('popularGames', now()->addHours(1), function () {
-            $games = $this->request->getPopularGames();
+        return Cache::remember('popularGames', now()->addHours(1), function () {
+            $platforms = $this->getPlatformsString([
+                ApiService::PC_PLATFORM,
+                ApiService::PS4_PLATFORM,
+                ApiService::PS5_PLATFORM,
+                ApiService::XONE_PLATFORM,
+            ]);
+
+            $games = APIService::url('games')
+                ->select([
+                    'name',
+                    'cover.url',
+                    'platforms.abbreviation',
+                    'slug',
+                    'rating',
+                ])->where([
+                    ['platforms', '=', $platforms,],
+                    ['first_release_date', '>=', $this->before],
+                    ['first_release_date', '<', $this->after],
+                    ['total_rating_count', '>', 5],
+                ])->sortDesc('total_rating')
+                ->limit(10)
+                ->get();
+
             return $this->format->formatPopularGames($games);
-        }); */
-        $platforms = $this->getPlatformsString([
-            ApiService::PC_PLATFORM,
-            ApiService::PS4_PLATFORM,
-            ApiService::PS5_PLATFORM,
-            ApiService::XONE_PLATFORM,
-        ]);
-
-        $games = APIService::url('games')
-            ->select([
-                'name',
-                'cover.url',
-                'platforms.abbreviation',
-                'slug',
-                'rating',
-            ])->where([
-                ['platforms', '=', $platforms,],
-                ['& first_release_date', '>=', $this->before],
-                ['& first_release_date', '<', $this->after],
-                ['& total_rating_count', '>', 5],
-            ])->sortDesc('total_rating')
-            ->limit(10)
-            ->get();
-
-        return $this->format->formatPopularGames($games);
+        });
     }
 
-    public function getReviewedGames()
+    public function getReviewedGames(): Collection
     {
-        /* return Cache::remember('reviewedGames', now()->addHours(1), function () {
-            $games = $this->request->getReviewedGames();
+        return Cache::remember('reviewedGames', now()->addHours(1), function () {
+            $platforms = $this->getPlatformsString([
+                ApiService::PC_PLATFORM,
+                ApiService::PS4_PLATFORM,
+                ApiService::PS5_PLATFORM,
+                ApiService::XONE_PLATFORM,
+            ]);
+
+            $games = APIService::url('games')
+                ->select([
+                    'name',
+                    'cover.url',
+                    'platforms.abbreviation',
+                    'total_rating',
+                    'slug',
+                    'summary'
+                ])->where([
+                    ['platforms', '=', $platforms,],
+                    ['first_release_date', '>=', $this->before],
+                    ['first_release_date', '<', $this->current],
+                    ['rating_count', '>', 5],
+                ])->sortDesc('total_rating')
+                ->limit(3)
+                ->get();
+
             return $this->format->formatReviewedGames($games);
-        }); */
-
-        $platforms = $this->getPlatformsString([
-            ApiService::PC_PLATFORM,
-            ApiService::PS4_PLATFORM,
-            ApiService::PS5_PLATFORM,
-            ApiService::XONE_PLATFORM,
-        ]);
-
-        $games = APIService::url('games')
-            ->select([
-                'name',
-                'cover.url',
-                'platforms.abbreviation',
-                'total_rating',
-                'slug',
-                'summary'
-            ])->where([
-                ['platforms', '=', $platforms,],
-                ['& first_release_date', '>=', $this->before],
-                ['& first_release_date', '<', $this->current],
-                ['& rating_count', '>', 5],
-            ])->sortDesc('total_rating')
-            ->limit(3)
-            ->get();
-
-        return $this->format->formatReviewedGames($games);
+        });
     }
 
-    public function getComingGames()
+    public function getComingGames(): Collection
     {
-        /* return Cache::remember('comingGames', now()->addHours(1), function () {
-            $games = $this->request->getReviewedGames();
-            return $this->format->formatReviewedGames($games);
-        }); */
-        $platforms = $this->getPlatformsString([
-            ApiService::PC_PLATFORM,
-            ApiService::PS4_PLATFORM,
-            ApiService::PS5_PLATFORM,
-            ApiService::XONE_PLATFORM,
-        ]);
+        return Cache::remember('comingGames', now()->addHours(1), function () {
+            $platforms = $this->getPlatformsString([
+                ApiService::PC_PLATFORM,
+                ApiService::PS4_PLATFORM,
+                ApiService::PS5_PLATFORM,
+                ApiService::XONE_PLATFORM,
+            ]);
 
-        $games = APIService::url('games')
-            ->select([
-                'name',
-                'cover.url',
-                'platforms.abbreviation',
-                'first_release_date',
-                'slug'
-            ])->where([
-                ['platforms', '=', $platforms,],
-                ['& first_release_date', '>', $this->current],
-            ])->sortAsc('first_release_date')
-            ->limit(5)
-            ->get();
+            $games = APIService::url('games')
+                ->select([
+                    'name',
+                    'cover.url',
+                    'platforms.abbreviation',
+                    'first_release_date',
+                    'slug'
+                ])->where([
+                    ['platforms', '=', $platforms,],
+                    ['first_release_date', '>', $this->current],
+                ])->sortAsc('first_release_date')
+                ->limit(5)
+                ->get();
 
-        return $this->format->formatComingGames($games);
+            return $this->format->formatComingGames($games);
+        });
     }
 
-    public function getGameReview(string $slug)
+    public function getGameReview(string $slug): Collection
     {
         $game = APIService::url('games')
             ->select([
