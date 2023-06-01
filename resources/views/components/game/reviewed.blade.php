@@ -6,7 +6,7 @@
                 src="{{ $game['cover'] }}">
         </a>
 
-        @if (isset($game['rating']))
+        @if (isset($game['total_rating']))
             <div id="{{ $game['slug'] }}"
                 class="absolute bottom-0 right-0 w-14 h-14 bg-dark rounded-full shadow-md shadow-purple-500"
                 style="right: -20px; bottom: -20px">
@@ -20,7 +20,7 @@
                     class="flex justify-center items-center h-full
                  font-semibold text-lg text-transparent bg-clip-text 
                  bg-gradient-to-r from-purple-500 to-pink-500">
-                    {{ $game['rating'] }}
+                    {{ $game['total_rating'] }}
                 </div>
             </div>
         @endif

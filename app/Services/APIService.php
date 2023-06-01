@@ -3,75 +3,73 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
-use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class APIService
 {
-    public $before;
-    public $after;
-    public $current;
+    public const PC_PLATFORM = '6';
+    public const PS4_PLATFORM = '48';
+    public const XONE_PLATFORM = '49';
+    public const PS5_PLATFORM = '167';
 
     public const BASE_URL = 'https://api.igdb.com/v4';
 
-    public function __construct()
+    protected $query;
+
+    public function __construct(protected string $path)
     {
-        $this->current = Carbon::now()->timestamp;
-        $this->before = Carbon::now()->subMonths(2)->timestamp;
-        $this->after = Carbon::now()->addMonths(2)->timestamp;
     }
 
-    public function makeRequest($body)
+    public static function url(string $path): APIService
+    {
+        return new APIService($path);
+    }
+
+    public function get() //: Collection
     {
         return Http::withHeaders(config('services.igdb'))
-            ->withBody($body)
-            ->post(self::BASE_URL . '/' . 'games')
+            ->withBody($this->query)
+            ->post(self::BASE_URL . '/' . $this->path)
             ->json();
     }
 
-    public function getPopularGames(): array
+    public function search(string $input): APIService
     {
-        return $this->makeRequest("fields name, cover.url, platforms.abbreviation, slug, rating; 
-        where platforms = (6,48,49,167)
-        & first_release_date >= {$this->before}
-        & first_release_date < {$this->after}
-        & total_rating_count > 5;
-        sort total_rating_count desc;
-        limit 10;");
+        $this->query .= 'search ' . "\"{$input}\"" . ';';
+
+        return $this;
     }
 
-    public function getReviewedGames(): array
+    public function select(array $fields): APIService
     {
-        return $this->makeRequest("fields name, cover.url, first_release_date, 
-        platforms.abbreviation, rating, rating_count, total_rating, summary, slug;
-        where platforms = (6,48,49,167)
-        & (first_release_date >= {$this->before}
-        & first_release_date < {$this->current}
-        & rating_count > 5);sort total_rating desc;
-        limit 3;");
+        $this->query .= 'fields ' . implode(',', $fields) . ';';
+
+        return $this;
     }
 
-    public function getComingGames(): array
+    public function where(array $fields): APIService
     {
-        return $this->makeRequest("fields name, cover.url, first_release_date, platforms.abbreviation, slug;
-        where platforms = (6,48,49,167)
-        & (first_release_date > {$this->current});
-        sort first_release_date asc;
-        limit 5;");
+        $this->query .= 'where ' . implode(' ', $fields) . ';';
+
+        return $this;
     }
 
-    public function getGame(string $slug): array
+    public function sort(string $condition): APIService
     {
-        return $this->makeRequest("fields name,cover.url,genres.name,involved_companies.company.name,
-            platforms.abbreviation,storyline, total_rating, total_rating_count,videos.*,screenshots.*,
-            similar_games.name,similar_games.cover.url,similar_games.rating,
-            similar_games.platforms.abbreviation,similar_games.slug; 
-            where slug=\"{$slug}\";");
+        $this->query .= 'sort ' . $condition . ';';
+
+        return $this;
     }
 
-    public function getSearchResults(string $input)
+    public function limit(int $number): APIService
     {
-        return $this->makeRequest("search \"{$input}\"; 
-        fields name, slug, cover.url;
-        limit 5;");
+        $this->query .= 'limit ' . $number . ';';
+
+        return $this;
+    }
+
+    public function getQueryString(): string
+    {
+        return $this->query;
     }
 }

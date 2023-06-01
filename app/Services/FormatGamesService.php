@@ -27,7 +27,7 @@ class FormatGamesService
             return collect($game)->merge([
                 'cover' => (array_key_exists('cover', $game)) ?
                     Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) : '/no-image.jpg',
-                'rating' => isset($game['rating']) ? round($game['rating']) . '%' : null,
+                'total_rating' => isset($game['total_rating']) ? round($game['total_rating']) . '%' : null,
                 'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
             ]);
         });
