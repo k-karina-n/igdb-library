@@ -5,11 +5,13 @@ namespace App\Services;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 
-class APIRequestService
+class APIService
 {
     public $before;
     public $after;
     public $current;
+
+    public const BASE_URL = 'https://api.igdb.com/v4';
 
     public function __construct()
     {
@@ -22,17 +24,17 @@ class APIRequestService
     {
         return Http::withHeaders(config('services.igdb'))
             ->withBody($body)
-            ->post('https://api.igdb.com/v4/games')
+            ->post(self::BASE_URL . '/' . 'games')
             ->json();
     }
 
     public function getPopularGames(): array
     {
         return $this->makeRequest("fields name, cover.url, platforms.abbreviation, slug, rating; 
-        where platforms = (48,49,136,6) 
-        & (first_release_date >= {$this->before}
+        where platforms = (6,48,49,167)
+        & first_release_date >= {$this->before}
         & first_release_date < {$this->after}
-        & total_rating_count > 5);
+        & total_rating_count > 5;
         sort total_rating_count desc;
         limit 10;");
     }
@@ -41,18 +43,17 @@ class APIRequestService
     {
         return $this->makeRequest("fields name, cover.url, first_release_date, 
         platforms.abbreviation, rating, rating_count, total_rating, summary, slug;
-        where platforms = (48,49,136,6)
+        where platforms = (6,48,49,167)
         & (first_release_date >= {$this->before}
         & first_release_date < {$this->current}
-        & rating_count > 5);
-        sort total_rating desc;
+        & rating_count > 5);sort total_rating desc;
         limit 3;");
     }
 
     public function getComingGames(): array
     {
         return $this->makeRequest("fields name, cover.url, first_release_date, platforms.abbreviation, slug;
-        where platforms = (48,49,136,6)
+        where platforms = (6,48,49,167)
         & (first_release_date > {$this->current});
         sort first_release_date asc;
         limit 5;");

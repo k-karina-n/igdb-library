@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Services\APIRequestService;
+use App\Services\APIService;
 use App\Services\FormatGamesService;
 
 class SearchService
 {
     public function __construct(
-        private APIRequestService $request,
+        private APIService $request,
         private FormatGamesService $format
     ) {
     }
