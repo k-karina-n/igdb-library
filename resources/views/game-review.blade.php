@@ -3,7 +3,7 @@
         {{-- Game details --}}
         <div class="pb-4 py-4 px-4 flex flex-col lg:flex-row">
             <div class="flex-none">
-                <img src="{{ $game['cover'] }}" alt="cover" class="w-52 h-72 rounded-lg shadow-md">
+                <img src="{{ $game->getCover() }}" alt="cover" class="w-52 h-72 rounded-lg shadow-md">
 
                 <div x-data="{ isTrailerModalVisible: false }" class="mt-6 mx-6">
                     <button @click="isTrailerModalVisible = true"
@@ -29,7 +29,7 @@
                                         style="padding-top: 56.25%">
                                         <iframe width="560" height="315"
                                             class="responsive-iframe absolute top-0 left-0 w-full h-full rounded-lg"
-                                            src="{{ $game['trailer'] }}" style="border:0;"
+                                            src="{{ $game->getTrailer() }}" style="border:0;"
                                             allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                     </div>
                                 </div>
@@ -43,14 +43,14 @@
                 <h2
                     class="pb-2 text-4xl font-semibold capitalize italic text-transparent 
                         bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-                    {{ $game['name'] }}
+                    {{ $game->getName() }}
                 </h2>
                 <div class="mt-3 text-slate-300">
-                    <span>{{ $game['genres'] }}</span>
+                    <span>{{ $game->getGenres() }}</span>
                     <span class="font-bold text-xl">|</span>
-                    <span>{{ $game['involved_companies'] }}</span>
+                    <span>{{ $game->getCompanies() }}</span>
                     <span class="font-bold text-xl">|</span>
-                    <span>{{ $game['platforms'] }}</span>
+                    <span>{{ $game->getPlatforms() }}</span>
                 </div>
 
                 <div class="mt-8 flex flex-wrap items-center space-x-12">
@@ -59,7 +59,7 @@
                             @push('scripts')
                                 @include('rating', [
                                     'id' => '#memberRating',
-                                    'rating' => $game['total_rating'],
+                                    'rating' => $game->getTotalRating(),
                                 ])
                             @endpush
                         </div>
@@ -71,8 +71,7 @@
                             @push('scripts')
                                 @include('rating', [
                                     'id' => '#criticRating',
-                                    'rating' => $game['total_rating_count'],
-                                    'event' => null
+                                    'rating' => $game->getTotalRatingCount(),
                                 ])
                             @endpush
                         </div>
@@ -80,7 +79,7 @@
                     </div>
                 </div>
 
-                <p class="mt-12 h-40 text-white text-justify overflow-y-scroll">{{ $game['storyline'] }}</p>
+                <p class="mt-12 h-40 text-white text-justify overflow-y-scroll">{{ $game->getStoryline() }}</p>
             </div>
         </div>
 
@@ -91,7 +90,7 @@
                 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
                 Images</h2>
             <div class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8">
-                @foreach ($game['screenshots'] as $screenshot)
+                @foreach ($game->getScreenshots() as $screenshot)
                     <a href="#"
                         @click.prevent="
                                 isImageModalVisible = true
@@ -128,7 +127,7 @@
             <div
                 class="h-80 mt-4 text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10
                 overflow-x-hidden overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
-                @foreach ($game['similar_games'] as $game)
+                @foreach ($game->getSimilarGames() as $game)
                     <x-game.popular :game="$game" />
                 @endforeach
             </div>

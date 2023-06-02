@@ -31,7 +31,7 @@ class FormatGamesService
 
     public function formatComingGames($game)
     {
-        return collect($game)->merge([
+        return $game->merge([
             'cover' => (array_key_exists('cover', $game)) ?
                 Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']) : '/no-image.jpg',
             'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),

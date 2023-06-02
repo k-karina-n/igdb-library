@@ -12,7 +12,7 @@ class SearchController extends Controller
     public function __invoke(SearchService $service, Request $request): View
     {
         return view('components/search-results', [
-            'results' => $service->get($request->search)
+            'results' => $service($request->search)
         ]);
     }
 }

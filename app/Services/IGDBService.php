@@ -3,10 +3,13 @@
 namespace App\Services;
 
 use App\Services\APIService;
-use App\Services\FormatGamesService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
+use App\DataObjects\PopularGameDataObject;
+use App\DataObjects\ReviewedGameDataObject;
+use App\DataObjects\ComingGameDataObject;
+use App\DataObjects\GameReviewDataObject;
 
 
 class IGDBService
@@ -15,7 +18,7 @@ class IGDBService
     private $current;
     private $after;
 
-    public function __construct(private FormatGamesService $format)
+    public function __construct()
     {
         $this->before = Carbon::now()->subMonths(2)->timestamp;
         $this->current = Carbon::now()->timestamp;
@@ -24,21 +27,19 @@ class IGDBService
 
     private function getPlatformsString(): string
     {
-        $platforms = [
+        $platforms = implode(',', [
             ApiService::PC_PLATFORM,
             ApiService::PS4_PLATFORM,
             ApiService::PS5_PLATFORM,
             ApiService::XONE_PLATFORM,
-        ];
-
-        $platforms = implode(',', $platforms);
+        ]);
 
         return "({$platforms})";
     }
 
     public function getPopularGames(): Collection
     {
-        return Cache::remember('popularGames', now()->addHours(1), function () {
+        return Cache::remember('pop', now()->addHours(1), function () {
             $platforms = $this->getPlatformsString();
 
             $response = APIService::url('games')
@@ -58,7 +59,7 @@ class IGDBService
                 ->get();
 
             return collect($response)->map(function ($game) {
-                return $this->format->formatPopularGame($game);
+                return new PopularGameDataObject(collect($game));
             });
         });
     }
@@ -86,7 +87,7 @@ class IGDBService
                 ->get();
 
             return collect($response)->map(function ($game) {
-                return $this->format->formatReviewedGames($game);
+                return new ReviewedGameDataObject(collect($game));
             });
         });
     }
@@ -94,8 +95,6 @@ class IGDBService
     public function getComingGames(): Collection
     {
         return Cache::remember('comingGames', now()->addHours(1), function () {
-            $platforms = $this->getPlatformsString();
-
             $response = APIService::url('games')
                 ->select([
                     'name',
@@ -104,19 +103,19 @@ class IGDBService
                     'first_release_date',
                     'slug'
                 ])->where([
-                    ['platforms', '=', $platforms,],
+                    ['platforms', '=', $this->getPlatformsString()],
                     ['first_release_date', '>', $this->current],
                 ])->sortAsc('first_release_date')
                 ->limit(5)
                 ->get();
 
             return collect($response)->map(function ($game) {
-                return $this->format->formatComingGames($game);
+                return new ComingGameDataObject(collect($game));
             });
         });
     }
 
-    public function getGameReview(string $slug): Collection
+    public function getGameReview(string $slug): GameReviewDataObject
     {
         $response = APIService::url('games')
             ->select([
@@ -135,6 +134,6 @@ class IGDBService
                 ['slug', '=', "\"{$slug}\""],
             ])->get();
 
-        return $this->format->formatGameReview($response[0]);
+        return new GameReviewDataObject(collect($response[0]));
     }
 }

@@ -3,18 +3,14 @@
 namespace App\Services;
 
 use App\Services\APIService;
-use App\Services\FormatGamesService;
+use App\DataObjects\SearchResultDataObject;
+use Illuminate\Support\Collection;
 
 class SearchService
 {
-    public function __construct(
-        private FormatGamesService $format
-    ) {
-    }
-
-    public function get($input)
+    public function __invoke($input): Collection
     {
-        $results = APIService::url('games')
+        $response = APIService::url('games')
             ->search($input)
             ->select([
                 'name',
@@ -23,6 +19,8 @@ class SearchService
             ])->limit(5)
             ->get();
 
-        return $this->format->formatSearchResults($results);
+        return collect($response)->map(function ($game) {
+            return new SearchResultDataObject(collect($game));
+        });
     }
 }
