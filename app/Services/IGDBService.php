@@ -11,9 +11,9 @@ use Carbon\Carbon;
 
 class IGDBService
 {
-    public $before;
-    public $current;
-    public $after;
+    private $before;
+    private $current;
+    private $after;
 
     public function __construct(private FormatGamesService $format)
     {
@@ -22,8 +22,15 @@ class IGDBService
         $this->after = Carbon::now()->addMonths(2)->timestamp;
     }
 
-    private function getPlatformsString(array $platforms): string
+    private function getPlatformsString(): string
     {
+        $platforms = [
+            ApiService::PC_PLATFORM,
+            ApiService::PS4_PLATFORM,
+            ApiService::PS5_PLATFORM,
+            ApiService::XONE_PLATFORM,
+        ];
+
         $platforms = implode(',', $platforms);
 
         return "({$platforms})";
@@ -32,14 +39,9 @@ class IGDBService
     public function getPopularGames(): Collection
     {
         return Cache::remember('popularGames', now()->addHours(1), function () {
-            $platforms = $this->getPlatformsString([
-                ApiService::PC_PLATFORM,
-                ApiService::PS4_PLATFORM,
-                ApiService::PS5_PLATFORM,
-                ApiService::XONE_PLATFORM,
-            ]);
+            $platforms = $this->getPlatformsString();
 
-            $games = APIService::url('games')
+            $response = APIService::url('games')
                 ->select([
                     'name',
                     'cover.url',
@@ -47,7 +49,7 @@ class IGDBService
                     'slug',
                     'rating',
                 ])->where([
-                    ['platforms', '=', $platforms,],
+                    ['platforms', '=', $platforms],
                     ['first_release_date', '>=', $this->before],
                     ['first_release_date', '<', $this->after],
                     ['total_rating_count', '>', 5],
@@ -55,21 +57,18 @@ class IGDBService
                 ->limit(10)
                 ->get();
 
-            return $this->format->formatPopularGames($games);
+            return collect($response)->map(function ($game) {
+                return $this->format->formatPopularGame($game);
+            });
         });
     }
 
     public function getReviewedGames(): Collection
     {
         return Cache::remember('reviewedGames', now()->addHours(1), function () {
-            $platforms = $this->getPlatformsString([
-                ApiService::PC_PLATFORM,
-                ApiService::PS4_PLATFORM,
-                ApiService::PS5_PLATFORM,
-                ApiService::XONE_PLATFORM,
-            ]);
+            $platforms = $this->getPlatformsString();
 
-            $games = APIService::url('games')
+            $response = APIService::url('games')
                 ->select([
                     'name',
                     'cover.url',
@@ -86,21 +85,18 @@ class IGDBService
                 ->limit(3)
                 ->get();
 
-            return $this->format->formatReviewedGames($games);
+            return collect($response)->map(function ($game) {
+                return $this->format->formatReviewedGames($game);
+            });
         });
     }
 
     public function getComingGames(): Collection
     {
         return Cache::remember('comingGames', now()->addHours(1), function () {
-            $platforms = $this->getPlatformsString([
-                ApiService::PC_PLATFORM,
-                ApiService::PS4_PLATFORM,
-                ApiService::PS5_PLATFORM,
-                ApiService::XONE_PLATFORM,
-            ]);
+            $platforms = $this->getPlatformsString();
 
-            $games = APIService::url('games')
+            $response = APIService::url('games')
                 ->select([
                     'name',
                     'cover.url',
@@ -114,13 +110,15 @@ class IGDBService
                 ->limit(5)
                 ->get();
 
-            return $this->format->formatComingGames($games);
+            return collect($response)->map(function ($game) {
+                return $this->format->formatComingGames($game);
+            });
         });
     }
 
     public function getGameReview(string $slug): Collection
     {
-        $game = APIService::url('games')
+        $response = APIService::url('games')
             ->select([
                 'name',
                 'cover.url',
@@ -137,6 +135,6 @@ class IGDBService
                 ['slug', '=', "\"{$slug}\""],
             ])->get();
 
-        return $this->format->formatGameReview($game[0]);
+        return $this->format->formatGameReview($response[0]);
     }
 }
