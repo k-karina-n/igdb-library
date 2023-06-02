@@ -39,9 +39,7 @@ class IGDBService
 
     public function getPopularGames(): Collection
     {
-        return Cache::remember('pop', now()->addHours(1), function () {
-            $platforms = $this->getPlatformsString();
-
+        return Cache::remember('popularGames', now()->addHours(1), function () {
             $response = APIService::url('games')
                 ->select([
                     'name',
@@ -50,7 +48,7 @@ class IGDBService
                     'slug',
                     'rating',
                 ])->where([
-                    ['platforms', '=', $platforms],
+                    ['platforms', '=', $this->getPlatformsString()],
                     ['first_release_date', '>=', $this->before],
                     ['first_release_date', '<', $this->after],
                     ['total_rating_count', '>', 5],
@@ -67,8 +65,6 @@ class IGDBService
     public function getReviewedGames(): Collection
     {
         return Cache::remember('reviewedGames', now()->addHours(1), function () {
-            $platforms = $this->getPlatformsString();
-
             $response = APIService::url('games')
                 ->select([
                     'name',
@@ -78,7 +74,7 @@ class IGDBService
                     'slug',
                     'summary'
                 ])->where([
-                    ['platforms', '=', $platforms,],
+                    ['platforms', '=', $this->getPlatformsString()],
                     ['first_release_date', '>=', $this->before],
                     ['first_release_date', '<', $this->current],
                     ['rating_count', '>', 5],

@@ -23,7 +23,7 @@ class SearchResultDataObject
 
     public function getCover(): string
     {
-        return $this->game['cover'] ?
+        return isset($this->game['cover']) ?
             Str::replaceFirst('thumb', 'cover_small', $this->game['cover']['url'])
             : '/no-image.jpg';
     }

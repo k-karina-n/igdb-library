@@ -23,21 +23,21 @@ class GameReviewDataObject
 
     public function getCover(): string
     {
-        return $this->game['cover'] ?
+        return isset($this->game['cover']) ?
             Str::replaceFirst('thumb', 'cover_big', $this->game['cover']['url'])
             : '/no-image.jpg';
     }
 
     public function getPlatforms(): string
     {
-        return $this->game['platforms'] ?
+        return isset($this->game['platforms']) ?
             collect($this->game['platforms'])->pluck('abbreviation')->implode(', ')
             : 'Waiting for updates';
     }
 
     public function getTotalRating(): string
     {
-        return $this->game['total_rating'] ?
+        return isset($this->game['total_rating']) ?
             round($this->game['total_rating'])
             : 0;
     }
@@ -51,26 +51,28 @@ class GameReviewDataObject
 
     public function getGenres(): string
     {
-        return collect($this->game['genres'])->pluck('name')->implode(', ');
+        return isset($this->game['genres']) ?
+            collect($this->game['genres'])->pluck('name')->implode(', ')
+            : 'Waiting for updates';
     }
 
     public function getCompanies(): string
     {
-        return $this->game['involved_companies'] ?
+        return isset($this->game['involved_companies']) ?
             $this->game['involved_companies'][0]['company']['name']
             : 'Waiting for updates';
     }
 
     public function getStoryline(): string
     {
-        return $this->game['storyline'] ?
+        return isset($this->game['storyline']) ?
             $this->game['storyline']
             : 'Waiting for updates';
     }
 
     public function getTrailer(): string
     {
-        return $this->game['videos'] ?
+        return isset($this->game['videos']) ?
             'htps://youtube.com/embed/' . $this->game['videos'][0]['video_id']
             : 'Waiting for updates';
     }

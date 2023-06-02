@@ -23,14 +23,14 @@ class ReviewedGameDataObject
 
     public function getCover(): string
     {
-        return $this->game['cover'] ?
+        return isset($this->game['cover']) ?
             Str::replaceFirst('thumb', 'cover_big', $this->game['cover']['url'])
             : '/no-image.jpg';
     }
 
     public function getPlatforms(): string
     {
-        return $this->game['platforms'] ?
+        return isset($this->game['platforms']) ?
             collect($this->game['platforms'])->pluck('abbreviation')->implode(', ')
             : 'Waiting for updates';
     }
@@ -42,6 +42,8 @@ class ReviewedGameDataObject
 
     public function getSummary(): string
     {
-        return $this->game['summary'];
+        return isset($this->game['summary']) ?
+            $this->game['summary']
+            : 'Waiting for updates';
     }
 }
