@@ -2,40 +2,11 @@
 
 namespace App\DataObjects;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use App\DataObjects\GameDataObject;
 use Illuminate\Support\Carbon;
 
-class ComingGameDataObject
+class ComingGameDataObject extends GameDataObject
 {
-    public function __construct(protected Collection $game)
-    {
-    }
-
-    public function getName(): string
-    {
-        return $this->game['name'];
-    }
-
-    public function getSlug(): string
-    {
-        return $this->game['slug'];
-    }
-
-    public function getCover(): string
-    {
-        return isset($this->game['cover']) ?
-            Str::replaceFirst('thumb', 'cover_small', $this->game['cover']['url'])
-            : '/no-image.jpg';
-    }
-
-    public function getPlatforms(): string
-    {
-        return isset($this->game['platforms']) ?
-            collect($this->game['platforms'])->pluck('abbreviation')->implode(', ')
-            : 'Waiting for updates';
-    }
-
     public function getFirstReleaseDate(): string
     {
         return isset($this->game['first_release_date']) ?
