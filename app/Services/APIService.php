@@ -58,6 +58,11 @@ class APIService
         $this->query = rtrim($this->query, "&") . ';';
 
         return $this;
+        // $fields = collect($fields)->implode(function (array $field) {
+        //     return );
+        // }, ', ');
+
+        // dd($fields);
     }
 
     public function sortAsc(string $condition): APIService

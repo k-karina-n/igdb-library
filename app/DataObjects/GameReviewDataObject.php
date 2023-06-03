@@ -35,14 +35,14 @@ class GameReviewDataObject
             : 'Waiting for updates';
     }
 
-    public function getTotalRating(): string
+    public function getTotalRating(): ?string
     {
         return isset($this->game['total_rating']) ?
             round($this->game['total_rating'])
             : 0;
     }
 
-    public function getTotalRatingCount(): string
+    public function getTotalRatingCount(): ?string
     {
         return isset($this->game['total_rating_count']) && $this->game['total_rating_count'] <= 100 ?
             round($this->game['total_rating_count'])

@@ -10,7 +10,9 @@
 
 <body class="bg-dark">
     <header class="mx-2 my-2 px-6">
-        <x-bar />
+        <x-bar>
+            <x-search.input />
+        </x-bar>
     </header>
 
     <main class="py-6">
@@ -18,7 +20,8 @@
     </main>
 
     <footer>
-        <div class="flex justify-center items-center mx-auto px-4 py-6
+        <div
+            class="flex justify-center items-center mx-auto px-4 py-6
             uppercase italic font-bold tracking-wide text-transparent 
             bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
             Powered By IGDB API

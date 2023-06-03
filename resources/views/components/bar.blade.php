@@ -12,7 +12,7 @@
 
     <div class="flex items-center mt-6 lg:mt-0">
 
-        <x-search-input />
+        {{ $slot }}
 
         <div class="ml-6">
             <a href="#">

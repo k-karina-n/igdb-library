@@ -35,7 +35,7 @@ class ReviewedGameDataObject
             : 'Waiting for updates';
     }
 
-    public function getRating(): string
+    public function getRating(): ?string
     {
         return isset($this->game['total_rating']) ? round($this->game['total_rating']) . '%' : null;
     }

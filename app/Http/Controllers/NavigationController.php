@@ -10,7 +10,7 @@ class NavigationController extends Controller
 
     public function index(): View
     {
-        return view('pages/index');
+        return view('index');
     }
 
     public function getGameReview(IGDBService $service, string $slug): View

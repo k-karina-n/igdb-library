@@ -35,7 +35,7 @@ class PopularGameDataObject
             : 'Waiting for updates';
     }
 
-    public function getRating(): string
+    public function getRating(): ?string
     {
         return isset($this->game['rating']) ?
             round($this->game['rating']) . '%'

@@ -1,5 +1,6 @@
 <x-layaout>
     <div class="px-28 container mx-auto">
+
         {{-- Game details --}}
         <div class="pb-4 py-4 px-4 flex flex-col lg:flex-row">
             <div class="flex-none">
@@ -45,6 +46,7 @@
                         bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
                     {{ $game->getName() }}
                 </h2>
+
                 <div class="mt-3 text-slate-300">
                     <span>{{ $game->getGenres() }}</span>
                     <span class="font-bold text-xl">|</span>
@@ -54,29 +56,8 @@
                 </div>
 
                 <div class="mt-8 flex flex-wrap items-center space-x-12">
-                    <div class="flex items-center space-x-2">
-                        <div id="memberRating" class="w-14 h-14 rounded-full relative text-md">
-                            @push('scripts')
-                                @include('rating', [
-                                    'id' => '#memberRating',
-                                    'rating' => $game->getTotalRating(),
-                                ])
-                            @endpush
-                        </div>
-                        <div class="text-xs text-white">Member <br> Score</div>
-                    </div>
-
-                    <div class="flex items-center space-x-2">
-                        <div id="criticRating" class="w-14 h-14 rounded-full relative text-md">
-                            @push('scripts')
-                                @include('rating', [
-                                    'id' => '#criticRating',
-                                    'rating' => $game->getTotalRatingCount(),
-                                ])
-                            @endpush
-                        </div>
-                        <div class="text-xs text-white">Critic <br> Score</div>
-                    </div>
+                    <x-rating id="memberRating" :rating="$game->getTotalRating()" score="Member" />
+                    <x-rating id="criticRating" :rating="$game->getTotalRatingCount()" score="Critic" />
                 </div>
 
                 <p class="mt-12 h-40 text-white text-justify overflow-y-scroll">{{ $game->getStoryline() }}</p>
@@ -85,10 +66,8 @@
 
         {{-- Images --}}
         <div x-data="{ isImageModalVisible: false, image: '' }" class="images-container relative pb-4 py-4 px-4 mt-8">
-            <h2
-                class="text-2xl uppercase italic font-bold tracking-wide text-transparent 
-                bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
-                Images</h2>
+            <x-h2 title="Images" />
+
             <div class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8">
                 @foreach ($game->getScreenshots() as $screenshot)
                     <a href="#"
@@ -118,17 +97,18 @@
         {{-- Similar games --}}
         <div class="container pb-4 py-4 px-4 mt-8">
 
-            <h2
-                class="text-2xl uppercase italic font-bold tracking-wide text-transparent 
-                bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l">
-                Similar Games
-            </h2>
-
+            <x-h2 title="Similar Games" />
             <div
                 class="h-80 mt-4 text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10
                 overflow-x-hidden overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
                 @foreach ($game->getSimilarGames() as $game)
-                    <x-game.popular :game="$game" />
+                    <div class="mt-8 h-80">
+                        <div class="relative inline-block">
+                            <x-cover :game=$game class="w-44 h-56" />
+                        </div>
+
+                        <x-game-title :game=$game class="text-base" />
+                    </div>
                 @endforeach
             </div>
         </div>
