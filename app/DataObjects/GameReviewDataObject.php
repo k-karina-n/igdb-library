@@ -64,6 +64,6 @@ class GameReviewDataObject extends GameDataObject
     {
         return collect($this->game['similar_games'])->map(function ($game) {
             return new PopularGameDataObject(collect($game));
-        });
+        })->take(5);
     }
 }

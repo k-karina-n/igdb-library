@@ -5,22 +5,15 @@
     <a href="https://tailwindcss.com/" target="_blank"><img src="#" width="150" alt="TailwindCSS Logo"></a>
 </p>
 
-<!-- <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p> -->
+<a href="https://htmx.org/" class="text-orange hover:font-bold">[htmx]</a>
 
 ## About Project
-Game Library powered by [IGDB](https://www.igdb.com/)
+Game Library powered by [IGDB](https://www.igdb.com/) & built using [HALT Stack](https://haltstack.dev/)
 
-### HALT Stack
-
-- **[HTMX](https://htmx.org/)**
-- **[Alpine.js](https://alpinejs.dev/)**
-- **[Laravel](https://laravel.com/)**
-- **[TailwindCSS](https://tailwindcss.com/)**
+**[HTMX](https://htmx.org/)**
+**[Alpine.js](https://alpinejs.dev/)**
+**[Laravel](https://laravel.com/)**
+**[TailwindCSS](https://tailwindcss.com/)**
 
 ## Getting Started
 These instructions will give you a copy of the project and running on your local machine for development and testing purposes. 

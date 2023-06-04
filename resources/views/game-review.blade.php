@@ -44,7 +44,7 @@
                     <x-rating id="criticRating" :rating="$game->getTotalRatingCount()" score="Critic" />
                 </div>
 
-                <p class="mt-12 h-40 text-white text-justify overflow-y-scroll">{{ $game->getStoryline() }}</p>
+                <p class="mt-12 text-white text-justify">{{ $game->getStoryline() }}</p>
             </div>
         </div>
 
@@ -73,8 +73,7 @@
 
             <x-h2 title="Similar Games" />
             <div
-                class="h-80 mt-4 text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10
-                overflow-x-hidden overflow-y-scroll scrollbar-thick scrollbar-thumb-blue-500 scrollbar-track-blue-100">
+                class="mt-4 text-sm grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-10">
                 @foreach ($game->getSimilarGames() as $game)
                     <div class="mt-8 h-80">
                         <div class="relative inline-block">
