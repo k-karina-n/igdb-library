@@ -1,12 +1,5 @@
 ## About Project
-Game Library powered by [IGDB](https://www.igdb.com/) & built using [HALT Stack](https://haltstack.dev/)
-
-<p align="center">
-    <a href="https://htmx.org/" target="_blank"><img src="/public/htmx.png" width="150" alt="HTMX Logo"></a>
-    <a href="https://alpinejs.dev/" target="_blank"><img src="/public/alpine.svg" width="150" alt="Alpine Logo"></a>
-    <a href="https://laravel.com" target="_blank"><img src="/public/laravel-logolockup-cmyk-red.svg" width="150" alt="Laravel Logo"></a>
-    <a href="https://tailwindcss.com/" target="_blank"><img src="/public/tailwindcss.svg" width="150" alt="TailwindCSS Logo"></a>
-</p>
+Game library powered by [IGDB](https://www.igdb.com/) & built using [HALT Stack](https://haltstack.dev/)
 
 ## Getting Started
 These instructions will give you a copy of the project and running on your local machine for development and testing purposes. 
@@ -14,7 +7,45 @@ These instructions will give you a copy of the project and running on your local
 ### Prerequisites
 To run this project locally, you need:
 
-- **PHP** >= 8.1.17
-- **Composer** >= 2.5.4 
+- **PHP** >= 8.2.6
+- **Laravel** >= 10.13.0
+- **Composer** >= 2.5.5
 
 *You can find the installation instructions for these dependencies on their respective websites.*
+
+## Installing
+**Clone the repo**
+```
+git clone https://github.com/k-karina-n/igdb-library.git
+```
+**Rename .env.example file to .env inside a project root and add the following information** 
+```
+IGDB_ID=tip8w5sp2acwrlfg3l0odgc3o09jm2
+IGDB_TOKEN='Bearer 5zj54zbmp0nnr1pq0co1utw4kpqd2s'
+```
+
+**Open the console and go to a project root directory**
+```
+cd igdb-library
+```
+
+**Create dependencies**
+```
+composer install
+composer dump-autoload
+```
+**Generate an application encryption key** 
+```
+php artisan key:generate
+```
+
+**Install packages and bundle application's assets**
+```
+npm i
+npm run build
+```
+
+**Run project**
+```
+php artisan serve
+```
