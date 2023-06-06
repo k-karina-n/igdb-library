@@ -23,20 +23,7 @@
                     <x-game-title :game=$game class="text-lg" />
                 </div>
 
-                <div class="content mt-12 text-white hidden lg:block">
-                    <div x-data="{ open: false, maxLength: 260, fullText: '', slicedText: '' }" x-init="fullText = $el.firstElementChild.textContent.trim();
-                    slicedText = fullText.slice(0, maxLength)">
-                        <div x-text="open ? fullText : slicedText.concat('...')" x-transition>{{ $game->getSummary() }}
-                            <div id="button"
-                                class="mt-4 leading-tight hover:-translate-y-1 hover:scale-100 transition ease-in-out duration-300
-                                hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-purple-500 to-pink-500">
-                                <a href="/game_reviews/{{ $game->getSlug() }}">
-                                    Read Full Text
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p class="mt-12 text-white hidden md:block lg:block h-36 overflow-auto">{{ $game->getSummary() }}</p>
             </div>
         </div>
     @endforeach

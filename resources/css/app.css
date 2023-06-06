@@ -1,6 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap');
 
 @tailwind base;
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(255 255 255 / 10%);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #643a73;
+  border-radius: 5px;
+  border: 3px solid var(--primary);
+}
 @tailwind components;
 @tailwind utilities;
 
@@ -10,10 +24,3 @@
   }
 }
 
-/* #red-indicator .htmx-request {
-  visibility:visible;
-}
-
-#red-indicator{
-  visibility: hidden;
-} */
