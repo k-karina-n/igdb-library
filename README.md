@@ -1,5 +1,5 @@
 ## About Project
-Game library powered by [IGDB](https://www.igdb.com/) & built using [HALT Stack](https://haltstack.dev/)
+Game library powered by [IGDB API](https://www.igdb.com/) & built using [HALT Stack](https://haltstack.dev/)
 
 ## Getting Started
 These instructions will give you a copy of the project and running on your local machine for development and testing purposes. 
