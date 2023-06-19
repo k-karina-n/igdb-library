@@ -14,10 +14,32 @@ use App\DataObjects\GameReviewDataObject;
 
 class IGDBService
 {
+    /**
+     * Date - two months before current date
+     *
+     * @var int
+     */
     private $before;
+
+    /**
+     * Date - current date
+     *
+     * @var int
+     */
     private $current;
+
+    /**
+     * Date - two months after current date
+     *
+     * @var int
+     */
     private $after;
 
+    /**
+     * Constructor method to set the time
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->before = Carbon::now()->subMonths(2)->timestamp;
@@ -25,6 +47,11 @@ class IGDBService
         $this->after = Carbon::now()->addMonths(2)->timestamp;
     }
 
+    /**
+     * Creates string with game platforms
+     *
+     * @return string
+     */
     private function getPlatformsString(): string
     {
         $platforms = implode(',', [
@@ -37,9 +64,14 @@ class IGDBService
         return "({$platforms})";
     }
 
+    /**
+     * Sends request to IGDB API Database and caches data for Popular Games section
+     *
+     * @return Collection
+     */
     public function getPopularGames(): Collection
     {
-        return Cache::remember('popularGames', now()->addHours(1), function () {
+        return Cache::remember('popularGames', now()->addMinutes(1), function () {
             $response = APIService::url('games')
                 ->select([
                     'name',
@@ -62,9 +94,14 @@ class IGDBService
         });
     }
 
+    /**
+     * Sends request to IGDB API Database and caches data for Recentrly Reviewed section
+     *
+     * @return Collection
+     */
     public function getReviewedGames(): Collection
     {
-        return Cache::remember('reviewedGames', now()->addHours(1), function () {
+        return Cache::remember('reviewedGames', now()->addMinutes(1), function () {
             $response = APIService::url('games')
                 ->select([
                     'name',
@@ -88,9 +125,14 @@ class IGDBService
         });
     }
 
+    /**
+     * Sends request to IGDB API Database and caches data for Coming Soon section
+     *
+     * @return Collection
+     */
     public function getComingGames(): Collection
     {
-        return Cache::remember('comingGames', now()->addHours(1), function () {
+        return Cache::remember('comingGames', now()->addMinutes(1), function () {
             $response = APIService::url('games')
                 ->select([
                     'name',
@@ -111,6 +153,13 @@ class IGDBService
         });
     }
 
+    /**
+     * Sends request to IGDB API Database and returns data on a clicked game by user
+     *
+     * @param string $slug
+     * 
+     * @return GameReviewDataObject
+     */
     public function getGameReview(string $slug): GameReviewDataObject
     {
         $response = APIService::url('games')

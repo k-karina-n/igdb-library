@@ -8,6 +8,11 @@ use Illuminate\Support\Str;
 
 class GameReviewDataObject extends GameDataObject
 {
+    /**
+     * Returns the game total rating
+     * 
+     * @return string|null
+     */
     public function getTotalRating(): ?string
     {
         return isset($this->game['total_rating']) ?
@@ -15,6 +20,11 @@ class GameReviewDataObject extends GameDataObject
             : 0;
     }
 
+    /**
+     * Returns the game total rating count
+     * 
+     * @return string|null
+     */
     public function getTotalRatingCount(): ?string
     {
         return isset($this->game['total_rating_count']) && $this->game['total_rating_count'] <= 100 ?
@@ -22,6 +32,11 @@ class GameReviewDataObject extends GameDataObject
             : 0;
     }
 
+    /**
+     * Returns the game genres
+     * 
+     * @return string
+     */
     public function getGenres(): string
     {
         return isset($this->game['genres']) ?
@@ -29,13 +44,23 @@ class GameReviewDataObject extends GameDataObject
             : 'Waiting for updates';
     }
 
-    public function getCompanies(): string
+    /**
+     * Returns the name of the company that released the game
+     * 
+     * @return string
+     */
+    public function getCompany(): string
     {
         return isset($this->game['involved_companies']) ?
             $this->game['involved_companies'][0]['company']['name']
             : 'Waiting for updates';
     }
 
+    /**
+     * Returns the game storyline
+     * 
+     * @return string
+     */
     public function getStoryline(): string
     {
         return isset($this->game['storyline']) ?
@@ -43,6 +68,11 @@ class GameReviewDataObject extends GameDataObject
             : 'Waiting for updates';
     }
 
+    /**
+     * Returns the link to the game trailer
+     * 
+     * @return string
+     */
     public function getTrailer(): string
     {
         return isset($this->game['videos']) ?
@@ -50,6 +80,11 @@ class GameReviewDataObject extends GameDataObject
             : 'Waiting for updates';
     }
 
+    /**
+     * Returns the game screenshots
+     * 
+     * @return Collection
+     */
     public function getScreenshots(): Collection
     {
         return collect($this->game['screenshots'])->map(function ($screenshot) {
@@ -60,6 +95,11 @@ class GameReviewDataObject extends GameDataObject
         })->take(6);
     }
 
+    /**
+     * Returns information on similar games
+     * 
+     * @return Collection
+     */
     public function getSimilarGames(): Collection
     {
         return collect($this->game['similar_games'])->map(function ($game) {

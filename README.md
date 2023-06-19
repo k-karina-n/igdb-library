@@ -21,7 +21,7 @@ git clone https://github.com/k-karina-n/igdb-library.git
 **Rename .env.example file to .env inside a project root and add the following information** 
 ```
 IGDB_ID=tip8w5sp2acwrlfg3l0odgc3o09jm2
-IGDB_TOKEN='Bearer 5zj54zbmp0nnr1pq0co1utw4kpqd2s'
+IGDB_TOKEN='Bearer jsfp3fvx0qeemf3vyb84p6t8oznhki'
 ```
 
 **Open the console and go to a project root directory**

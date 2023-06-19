@@ -8,7 +8,14 @@ use Illuminate\Support\Collection;
 
 class SearchService
 {
-    public function __invoke($input): Collection
+    /**
+     * Sends request to IGDB API Database
+     * 
+     * @param string $input User search input request 
+     * 
+     * @return Collection
+     */
+    public function __invoke(string $input): Collection
     {
         $response = APIService::url('games')
             ->search($input)

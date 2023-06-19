@@ -9,6 +9,14 @@ use Illuminate\Contracts\View\View;
 
 class SearchController extends Controller
 {
+    /**
+     * Returns Search Results
+     * 
+     * @param SearchService $service
+     * @param Request $request
+     * 
+     * @return View
+     */
     public function __invoke(SearchService $service, Request $request): View
     {
         return view('components/search/results', [

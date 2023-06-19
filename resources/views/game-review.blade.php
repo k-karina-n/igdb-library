@@ -34,7 +34,7 @@
                 <div class="mt-3 text-slate-300">
                     <span>{{ $game->getGenres() }}</span>
                     <span class="font-bold text-xl">|</span>
-                    <span>{{ $game->getCompanies() }}</span>
+                    <span>{{ $game->getCompany() }}</span>
                     <span class="font-bold text-xl">|</span>
                     <span>{{ $game->getPlatforms() }}</span>
                 </div>
