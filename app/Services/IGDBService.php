@@ -71,7 +71,7 @@ class IGDBService
      */
     public function getPopularGames(): Collection
     {
-        return Cache::remember('popularGames', now()->addMinutes(1), function () {
+        return Cache::remember('popularGames', now()->addHour(1), function () {
             $response = APIService::url('games')
                 ->select([
                     'name',
@@ -101,7 +101,7 @@ class IGDBService
      */
     public function getReviewedGames(): Collection
     {
-        return Cache::remember('reviewedGames', now()->addMinutes(1), function () {
+        return Cache::remember('reviewedGames', now()->addHour(1), function () {
             $response = APIService::url('games')
                 ->select([
                     'name',
@@ -132,7 +132,7 @@ class IGDBService
      */
     public function getComingGames(): Collection
     {
-        return Cache::remember('comingGames', now()->addMinutes(1), function () {
+        return Cache::remember('comingGames', now()->addHour(1), function () {
             $response = APIService::url('games')
                 ->select([
                     'name',
